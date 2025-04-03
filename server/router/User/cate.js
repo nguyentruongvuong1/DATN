@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pool = require('../database/db')
+var pool = require('../../database/db')
 
 
 // Lấy danh mục

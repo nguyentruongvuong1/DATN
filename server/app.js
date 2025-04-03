@@ -15,13 +15,15 @@ var corsOptionsDelegate = function (req, callback) {
 
 
 // Sử dụng các router đã tạo
-var indexRouter = require('./router/index');
-var productRouter = require('./router/product');
-var cateRouter = require('./router/cate');
-var userRouter = require('./router/user');
-var adminRouter = require('./router/admin');
-var bannerRouter = require('./router/banner');
-var reviewsRouter = require('./router/reviews');
+var indexRouter = require('./router/User/index');
+var productRouter = require('./router/User/product');
+var cateRouter = require('./router/User/cate');
+var userRouter = require('./router/User/user');
+var bannerRouter = require('./router/User/banner');
+var reviewsRouter = require('./router/User/reviews');
+
+var adminRouter = require('./router/Admin/admin');
+
 
 app.use(express.json());
 app.use(cors(corsOptionsDelegate))

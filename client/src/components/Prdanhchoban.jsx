@@ -11,6 +11,7 @@ import { checkLogin, updateCountPrlike } from "../AuthSlice";
 import "@ant-design/v5-patch-for-react-19";
 import { message } from "antd";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 export default function Prdanhchoban() {
   const dispatch = useDispatch();
@@ -84,6 +85,9 @@ export default function Prdanhchoban() {
     }
   };
 
+  // Tăng lượt xem của sản phẩm
+  const View = async (id) => await axios.post(`http://localhost:3000/pr/view/${id}`); 
+
   return (
     <main className={styles.bgmain}>
       <section className={styles.container}>
@@ -132,7 +136,7 @@ export default function Prdanhchoban() {
               </div>
               <div className={styles.product_btn}>
                 <div className={styles.pr_xemchitiet}>
-                  <button>
+                  <button onClick={() => View(pr.id)}>
                     {" "}
                     <Link
                       to={`/chi_tiet_san_pham/${pr.id}`}

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pool = require('../database/db')
+var pool = require('../../database/db')
 
 
 // Đánh giá sản phẩm dựa khi mua sản phẩm thành công

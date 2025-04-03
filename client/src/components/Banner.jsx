@@ -1,6 +1,6 @@
 import styles from "../styles/User/banner.module.css";
 import { useState, useEffect } from "react";
-
+import {Link} from "react-router-dom"
 export default function Banner() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [images, setimages] = useState([]);
@@ -52,10 +52,10 @@ export default function Banner() {
           </p>
           <div className={styles.banner_btn}>
             <div className={styles.btn_lienhe}>
-              <a href="">Liên hệ</a>
+              <Link href="">Liên hệ</Link>
             </div>
             <div className={styles.btn_khampha}>
-              <a href="">Khám phá ngay</a>
+              <Link href="">Khám phá ngay</Link>
             </div>
           </div>
         </div>

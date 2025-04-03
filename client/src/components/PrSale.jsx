@@ -10,7 +10,7 @@ import { checkLogin, updateCountPrlike } from "../AuthSlice";
 import "@ant-design/v5-patch-for-react-19";
 import { message } from "antd";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 export default function PrSale() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -83,6 +83,10 @@ export default function PrSale() {
     }
   };
 
+  // Tang view
+  const View = async (id) => await axios.post(`http://localhost:3000/pr/view/${id}`); 
+
+
   return (
     <main className={styles.bgmain}>
       <section className={styles.container}>
@@ -129,7 +133,7 @@ export default function PrSale() {
             
               <div className={styles.product_btn}>
                 <div className={styles.pr_xemchitiet}>
-                  <button>
+                  <button onClick={() => View(pr.id)}>
                     {" "}
                     <Link
                       to={`/chi_tiet_san_pham/${pr.id}`}

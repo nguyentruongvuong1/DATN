@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pool = require('../database/db'); // Đảm bảo đã sử dụng mysql2/promise
+var pool = require('../../database/db'); // Đảm bảo đã sử dụng mysql2/promise
 
 // API CATE------------------------------------------------------------------------------------------------------------------------------------------
 // API lấy danh sách cate

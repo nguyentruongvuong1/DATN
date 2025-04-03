@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pool = require('../database/db');
+var pool = require('../../database/db');
 const { route } = require('.');
 
 // lấy sản phẩm
@@ -83,19 +83,30 @@ router.get('/detailPr/:id', async (req, res) => {
 });
 
 // Lấy sản phẩm liên quan
-router.get('/prlq/:cate_id', async(req, res) =>{
-    const {cate_id} = req.params;
+router.get('/prlq/:id', async (req, res) => {
+    const id = parseInt(req.params.id, 10); // Đảm bảo id là số nguyên
     
-    try{
-        const sql = `SELECT * FROM product WHERE cate_id = ? AND status = 1 ORDER BY view desc Limit 0,8`;
-        const [result] = await pool.query(sql, [cate_id]);
-         res.json(result)
-        
-    }catch (err) {
+    if (isNaN(id)) {
+        return res.status(400).json({ message: "ID sản phẩm không hợp lệ" });
+    }
+
+    try {
+        const sql = `
+            SELECT * FROM product 
+            WHERE cate_id = (SELECT cate_id FROM product WHERE id = ?) 
+            AND id != ? 
+            AND status = 1 
+            ORDER BY view DESC 
+            LIMIT 8
+        `;
+
+        const [result] = await pool.query(sql, [id, id]);
+        res.json(result);
+    } catch (err) {
         console.error("Lỗi truy vấn:", err);
         res.status(500).json({ message: "Lỗi lấy chi tiết sản phẩm", error: err.message });
     }
-})
+});
 
 // 
  router.get('/pr/:cate_id', async(req, res) =>{
@@ -112,59 +123,6 @@ router.get('/prlq/:cate_id', async(req, res) =>{
     }
 })
 
-// Paginate sản phẩm theo cate
-
-// Lấy sản phẩm theo loại cây
-// router.get("/products-by-type/:type_cate_id", async (req, res) => {
-//     const { type_cate_id } = req.params;
-//     const { sort, page = 1, limit = 8 } = req.query; // Thêm tham số phân trang
-    
-//     // Validate input
-//     const pageNumber = parseInt(page);
-//     const limitNumber = parseInt(limit);
-//     if (isNaN(pageNumber) || isNaN(limitNumber) || pageNumber < 1 || limitNumber < 1) {
-//         return res.status(400).json({ message: "Tham số phân trang không hợp lệ" });
-//     }
-
-//     const offset = (pageNumber - 1) * limitNumber;
-
-//     let orderBy = "p.create_date DESC";
-//     if (sort === "price_asc") orderBy = "p.price ASC";
-//     else if (sort === "price_desc") orderBy = "p.price DESC";
-//     else if (sort === "view") orderBy = "p.view DESC";
-
-//     try {
-//         // Query lấy dữ liệu sản phẩm
-//         const [products] = await pool.query(`
-//             SELECT p.*
-//             FROM product p
-//             JOIN product_type_cate ptc ON p.id = ptc.pr_id
-//             WHERE ptc.type_cate_id = ?
-//             ORDER BY ${orderBy}
-//             LIMIT ? OFFSET ?
-//         `, [type_cate_id, limitNumber, offset]);
-
-//         // Query lấy tổng số sản phẩm
-//         const [[totalResult]] = await pool.query(`
-//             SELECT COUNT(*) as total
-//             FROM product p
-//             JOIN product_type_cate ptc ON p.id = ptc.pr_id
-//             WHERE ptc.type_cate_id = ?
-//         `, [type_cate_id]);
-
-//         res.json({
-//             products,
-//             total: totalResult.total,
-//             page: pageNumber,
-//             totalPages: Math.ceil(totalResult.total / limitNumber),
-//             limit: limitNumber
-//         });
-        
-//     } catch (err) {
-//         console.error("Lỗi lấy sản phẩm:", err);
-//         res.status(500).json({ message: "Lỗi lấy sản phẩm", error: err.message });
-//     }
-// });
 
 router.get("/products-by-type/:type_cate_id", async (req, res) => {
     const { type_cate_id } = req.params;
@@ -249,56 +207,6 @@ router.get("/products-by-type/:type_cate_id", async (req, res) => {
     }
 });
 
-
-// product của cate
-// router.get("/products-by-cate/:cate_id", async (req, res) => {
-//     const { cate_id } = req.params;
-//     const { sort, page = 1, limit = 8 } = req.query; // Thêm tham số phân trang
-    
-//     // Validate input
-//     const pageNumber = parseInt(page);
-//     const limitNumber = parseInt(limit);
-//     if (isNaN(pageNumber) || isNaN(limitNumber) || pageNumber < 1 || limitNumber < 1) {
-//         return res.status(400).json({ message: "Tham số phân trang không hợp lệ" });
-//     }
-
-//     const offset = (pageNumber - 1) * limitNumber;
-
-//     let orderBy = "p.create_date DESC";
-//     if (sort === "price_asc") orderBy = "p.price ASC";
-//     else if (sort === "price_desc") orderBy = "p.price DESC";
-//     else if (sort === "view") orderBy = "p.view DESC";
-
-//     try {
-//         // Query lấy dữ liệu sản phẩm theo danh mục
-//         const [products] = await pool.query(`
-//             SELECT p.*
-//             FROM product p
-//             WHERE p.cate_id = ?
-//             ORDER BY ${orderBy}
-//             LIMIT ? OFFSET ?
-//         `, [cate_id, limitNumber, offset]);
-
-//         // Query lấy tổng số sản phẩm trong danh mục
-//         const [[totalResult]] = await pool.query(`
-//             SELECT COUNT(*) as total
-//             FROM product p
-//             WHERE p.cate_id = ?
-//         `, [cate_id]);
-
-//         res.json({
-//             products,
-//             total: totalResult.total,
-//             page: pageNumber,
-//             totalPages: Math.ceil(totalResult.total / limitNumber),
-//             limit: limitNumber
-//         });
-        
-//     } catch (err) {
-//         console.error("Lỗi lấy sản phẩm:", err);
-//         res.status(500).json({ message: "Lỗi lấy sản phẩm", error: err.message });
-//     }
-// });
 
 router.get("/products-by-cate/:cate_id", async (req, res) => {
     const { cate_id } = req.params;
@@ -451,49 +359,6 @@ router.get('/favorite_user/:user_id', async (req, res) =>{
 
 
 // Lấy giá lấy nhất và nhỏ nhất của sản phẩm thuộc danh mục
-router.get("/price-range/:cateId", async (req, res) => {
-    const cateId = req.params.cateId;
-    try {
-        const sql = `
-            SELECT 
-                c.id AS cate_id,
-                c.name AS cate_name,
-                MIN(p.price) AS min_price,
-                MAX(p.price) AS max_price
-            FROM product p
-            JOIN cate c ON p.cate_id = c.id
-            WHERE c.id = ?
-            GROUP BY c.id, c.name
-        `;
-
-        const [result] = await pool.query(sql, [cateId]);
-        res.json(result);
-    } catch (error) {
-        console.error("Lỗi truy vấn:", error);
-        res.status(500).json({ message: "Lỗi server", error });
-    }
-});
-
-
-// router.get("/price-range_typecate/:type_cate_id", async (req, res) => {
-//     const { type_cate_id } = req.params;
-  
-//     try {
-//       const [rows] = await pool.query(
-//         `SELECT MIN(p.price) AS min_price, MAX(p.price) AS max_price
-//         FROM product p
-//         JOIN product_type_cate ptc ON p.id = ptc.pr_id
-//         WHERE ptc.type_cate_id = ?`, 
-//         [type_cate_id]
-//       );
-  
-//       res.json(rows[0]);
-//     } catch (error) {
-//       console.error("Lỗi truy vấn:", error);
-//       res.status(500).json({ error: "Lỗi server" });
-//     }
-//   });
-
 router.get("/price-range_typecate/:type_cate_id", async (req, res) => {
     const { type_cate_id } = req.params;
     
@@ -517,6 +382,7 @@ router.get("/price-range_typecate/:type_cate_id", async (req, res) => {
     }
 });
 
+// Giá lớn nhất và nhỏ nhất của sản phẩm thep cate
 router.get("/price-range-cate/:cate_id", async (req, res) => {
     const { cate_id } = req.params;
     
@@ -538,6 +404,18 @@ router.get("/price-range-cate/:cate_id", async (req, res) => {
         res.status(500).json({ message: "Lỗi lấy khoảng giá", error: err.message });
     }
 });
+
+// Tăng lượt xem sản phẩm
+router.post('/view/:id_pr', async (req, res) =>{
+    const {id_pr} = req.params;
+    try{
+          const [result] = await pool.query(`UPDATE product SET view = view + 1 WHERE id = ?`, [id_pr]);
+          res.json({message : "Đã tăng lượt xem thành công"})
+  
+    }catch (error) {
+          res.status(500).json({ message: 'Lỗi server khi tăng lượt xem', error: error.message });
+    }
+  })
 
 
 

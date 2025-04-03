@@ -68,7 +68,7 @@ export default function Prdetail() {
   useEffect(() => {
     const fetchprlq = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/pr/prlq/${pr?.cate_id}`);
+        const res = await fetch(`http://localhost:3000/pr/prlq/${id}`);
         const data = await res.json();
         setprlq(data);
 
@@ -90,7 +90,7 @@ export default function Prdetail() {
       }
     };
     fetchprlq();
-  }, [pr?.cate_id, user]);
+  }, [id, user]);
 
   // Lấy reviews của sản phẩm
   useEffect(() => {
@@ -207,6 +207,10 @@ export default function Prdetail() {
     message.success("Bạn đã thêm sản phẩm vào giỏ hàng");
   };
 
+   // Tang view
+   const View = async (id) => await axios.post(`http://localhost:3000/pr/view/${id}`); 
+
+
   // Nếu chưa có dữ liệu, hiển thị thông báo
   if (!pr) return <p>Đang tải...</p>;
 
@@ -261,6 +265,10 @@ export default function Prdetail() {
             <div className={styles.masp}>
               {" "}
               <strong>Mã sản phẩm:</strong> {pr.id}{" "}
+            </div>
+            <div className={styles.masp}>
+              {" "}
+              <strong>Lượt xem:</strong> {pr.view}{" "}
             </div>
             {pr.price_sale > 0 ? (
               <div>
@@ -456,7 +464,7 @@ export default function Prdetail() {
 
                 <div className={styles.product_btn}>
                   <div className={styles.pr_xemchitiet}>
-                    <button>
+                    <button onClick={() => View(pr.id)}>
                       {" "}
                       <Link
                         to={`/chi_tiet_san_pham/${pr.id}`}

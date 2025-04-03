@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pool = require('../database/db')
+var pool = require('../../database/db')
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
 const jwt = require('node-jsonwebtoken')
@@ -342,7 +342,6 @@ router.post('/upload', upload.single('file'), (req, res) =>{
 })
 
 
-// Cập nhật thông tin user
 
 
 module.exports = router;
