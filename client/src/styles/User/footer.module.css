@@ -1,0 +1,100 @@
+.bgfooter{
+    background-image: url('https://mowgarden.com/wp-content/uploads/2022/11/vuon-cay-canh-noi-that.jpg');
+    padding: 20px 40px;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bgfooter::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.445); /* Màu đen với độ trong suốt 50% */
+    z-index: 1;
+}
+
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_logo{
+    width: 300px;
+    position: relative; 
+    z-index: 2;
+}
+
+.footer_logo p{
+    color: white;
+    line-height: 30px;
+    font-size: 18px;
+    text-align: justify;
+    position: relative; 
+    z-index: 2;
+}
+
+.footer_vct{
+    width: auto;
+    position: relative; 
+    z-index: 2;
+}
+
+.footer_vct a{
+    display: block;
+    text-decoration: none;
+    line-height: 30px;
+    color: white;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 0.5px dotted #ccc;
+    font-weight: normal !important;
+}
+
+.footer_vct p{
+    margin:  0;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    height: 50px;
+}
+
+.footer_vct p::before{
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 2px;
+    background-color: white;
+    margin-top: 40px;
+}
+
+.footer_bando {
+    position: relative;
+    z-index: 2;
+
+}
+
+.footer_bando h2{
+ color: white;
+ text-align: center;
+}

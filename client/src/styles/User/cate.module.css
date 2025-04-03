@@ -1,0 +1,77 @@
+
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+.bgwhite{
+    background-color: white;
+    
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.bgnav{
+    background-color: #FFF9E1;
+    height: auto;
+    padding-top: 20px;
+}
+
+.titledanhmuc{
+    text-align: center;
+    font-size: 20px;
+}
+
+.fullcate {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép các item xuống dòng */
+    justify-content: center; /* Căn giữa danh sách */
+    gap: 20px; /* Khoảng cách giữa các item */
+    padding: 20px;
+}
+
+.cate {
+    width: 250px; /* Đảm bảo không bị co giãn */
+    height: 250px;
+    overflow: hidden;
+    position: relative; /* Để căn chỉnh tiêu đề */
+}
+
+.cate img {
+    width: 100%; /* Ảnh chiếm toàn bộ khung */
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    transition: transform 0.3s ease-in-out;
+}
+
+.cate:hover img {
+    transform: scale(1.2); /* Hiệu ứng zoom */
+}
+
+/* Điều chỉnh vị trí tiêu đề */
+.cate p {
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #224229;
+    background-color: #224229;
+    color: white;
+    height: 32px;
+    width: 150px;
+    text-align: center;
+    line-height: 32px;
+    position: absolute;
+    bottom: 10px; /* Cố định ở cuối */
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa ngang */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.cate p:hover {
+    background-color: #15351c;
+}
