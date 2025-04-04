@@ -44,7 +44,7 @@ router.post('/dangky', cleanupExpiredOTP, async (req, res) => {
   
       // Kiểm tra email tồn tại
       const [user] = await pool.execute('SELECT id FROM user WHERE email = ?', [email]);
-      if (user.length > 0) {
+      if (user.length && users.length > 0) {
         return res.status(400).json({ success: false, message: 'Email đã tồn tại' });
       }
   

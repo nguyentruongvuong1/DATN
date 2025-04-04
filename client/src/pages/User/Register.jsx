@@ -90,7 +90,7 @@ export default function Register() {
         
         navigate("/xacminh-otp");
       } else {
-        setError(data.thongbao || "Đăng ký thất bại. Vui lòng thử lại.");
+        setError(data.thongbao || "Đăng ký thất bại. Do email đã tồn tại.");
       }
     } catch (err) {
       console.error("Registration error:", err);

@@ -27,6 +27,41 @@ router.get("/prhot", async (req, res) => {
       res.status(500).json({ message: "Lỗi server" });
     }
   });
+// Lấy danh mục sản phẩm có sản phẩm
+  router.get('/categories-with-products', async (req, res) => {
+    try {
+      // Lấy tất cả danh mục
+      const [categories] = await pool.query('SELECT * FROM cate WHERE status = 1 ORDER BY create_date DESC');
+      
+      // Lấy sản phẩm cho từng danh mục
+      const categoriesWithProducts = await Promise.all(
+        categories.map(async (category) => {
+          const [products] = await pool.query(`
+            SELECT p.* 
+            FROM product p 
+            WHERE p.cate_id = ? AND p.status = 1 
+            ORDER BY p.view DESC 
+            LIMIT 4
+          `, [category.id]);
+          
+          return {
+            ...category,
+            products: products.map(product => ({
+              ...product,
+              // Format giá nếu cần
+              price: Number(product.price),
+              price_sale: Number(product.price_sale)
+            }))
+          };
+        })
+      );
+  
+      res.json(categoriesWithProducts);
+    } catch (error) {
+      console.error('Error fetching categories with products:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 // Lấy sản phẩm mới 
 router.get("/prnew", async (req, res) => {
@@ -123,7 +158,7 @@ router.get('/prlq/:id', async (req, res) => {
     }
 })
 
-
+// Lấy sản phẩm theo type_cate
 router.get("/products-by-type/:type_cate_id", async (req, res) => {
     const { type_cate_id } = req.params;
     const { sort, page = 1, limit = 8, minPrice, maxPrice } = req.query; // Thêm tham số lọc giá
@@ -207,7 +242,7 @@ router.get("/products-by-type/:type_cate_id", async (req, res) => {
     }
 });
 
-
+// Lấy sản phẩm theo danh muc
 router.get("/products-by-cate/:cate_id", async (req, res) => {
     const { cate_id } = req.params;
     const { sort, page = 1, limit = 8, minPrice, maxPrice } = req.query; // Thêm tham số lọc giá

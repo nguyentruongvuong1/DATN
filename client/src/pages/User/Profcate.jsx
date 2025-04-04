@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styles from"../../styles/User/profcate.module.css";
+import styles from "../../styles/User/profcate.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSlidersH,
-  faHeart,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSlidersH, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useParams, Link } from "react-router-dom";
 import { checkLogin, updateCountPrlike } from "../../AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -82,7 +79,7 @@ const ProductPage = () => {
       setIsLoading(true);
       try {
         const url = `http://localhost:3000/pr/products-by-type/${cate_id}?sort=${sortPr}&page=${currentPage}&limit=${itemsPerPage}&minPrice=${selectedMin}&maxPrice=${selectedMax}`;
-        
+
         const products = await fetch(url);
         const response = await products.json();
         Setproduct(response.products || response);
@@ -110,7 +107,15 @@ const ProductPage = () => {
       }
     };
     fetchData();
-  }, [user, cate_id, sortPr, currentPage, itemsPerPage, selectedMin, selectedMax]);
+  }, [
+    user,
+    cate_id,
+    sortPr,
+    currentPage,
+    itemsPerPage,
+    selectedMin,
+    selectedMax,
+  ]);
 
   useEffect(() => {
     const fetchPriceRange = async () => {
@@ -211,7 +216,7 @@ const ProductPage = () => {
                     type="range"
                     min={minPrice}
                     max={maxPrice}
-                    step="1000"
+                    step="20000"
                     value={selectedMin}
                     onChange={(e) =>
                       handlePriceChange(Number(e.target.value), selectedMax)
@@ -222,19 +227,21 @@ const ProductPage = () => {
                     type="range"
                     min={minPrice}
                     max={maxPrice}
-                    step="1000"
+                    step="20000"
                     value={selectedMax}
                     onChange={(e) =>
                       handlePriceChange(selectedMin, Number(e.target.value))
                     }
                     className={`${styles.range} ${styles.rangeMax}`}
                   />
+
+                  
                 </div>
 
-                <p>
-                  Giá: {Number(selectedMin).toLocaleString("vi")} -{" "}
-                  {Number(selectedMax).toLocaleString("vi")}
-                </p>
+                <p className={styles.rangeWrapper_gia}>
+                    Giá: {Number(selectedMin).toLocaleString("vi")} -{" "}
+                    {Number(selectedMax).toLocaleString("vi")}
+                  </p>
 
                 <h3 className={styles["filter-danhmuc"]}>DANH MỤC</h3>
                 {cate.map((c) => (
@@ -309,7 +316,9 @@ const ProductPage = () => {
                     <div className={styles.product_img}>
                       <img
                         src={
-                          pr.images ? pr.images.split(",")[0] : "/default-image.jpg"
+                          pr.images
+                            ? pr.images.split(",")[0]
+                            : "/default-image.jpg"
                         }
                         alt={pr.name}
                       />
@@ -321,7 +330,9 @@ const ProductPage = () => {
                       onClick={() => toggleFavorite(pr.id)}
                     >
                       <i
-                        style={{ color: likePr[pr.id] === true ? "red" : "black" }}
+                        style={{
+                          color: likePr[pr.id] === true ? "red" : "black",
+                        }}
                       >
                         <FontAwesomeIcon icon={faHeart} />
                       </i>
@@ -338,7 +349,9 @@ const ProductPage = () => {
                         <button
                           onClick={() => {
                             dispatch(themPr(pr));
-                            message.success("Bạn đã thêm sản phẩm vào giỏ hàng");
+                            message.success(
+                              "Bạn đã thêm sản phẩm vào giỏ hàng"
+                            );
                           }}
                         >
                           Thêm vào giỏ

@@ -1,10 +1,4 @@
 
-body{
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
-}
 
 .container{
     max-width: 1200px;
@@ -196,13 +190,13 @@ body{
 }
 
 .pr_xemchitiet:hover{
-    color: white;
+   
     background-color: #00791C;
     
 }
 
 .pr_themvaogio:hover{
-    color: white;
+    
     background-color: #f29320;
     
 }

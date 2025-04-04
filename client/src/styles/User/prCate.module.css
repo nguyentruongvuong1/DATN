@@ -3,56 +3,20 @@
 .container{
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .bgmain{
     background-color: #FCF9F3;
-    min-height: auto;
-   }
-   
-.title{
-    display: flex;
-    position: relative;
-}
-
-.title_btnxt{
-    position: absolute;
-    right: 0%;
-    margin-top: 28px;
-    height: 35px;
-    line-height: 35px;
-    width: auto;
-    text-align: center;
-    padding: 0 10px;
-    transition: all 0.3s ease-in-out;
   
+   }
+.container_title{
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.title_btnxt a{
-    text-decoration: none;
-    color: #224229;
-    margin-right: 5px;
-}
-
-
-
-.title_btnxt:hover i{
-    display: inline;
-
-}
-
-.title_btnxt:hover{
-    background-color: #15351c;
-    border-radius: 50px;
-    color: white;
-}
-
-.title_btnxt:hover a{
-    color: white;
-}
-
-
-.title_name{
+   .title_name{
     position: relative; 
    width: 1200px;
    padding-top: 20px;
@@ -83,19 +47,30 @@
     bottom: 0%;
     margin-bottom: -4px;
 }
+ 
 
 .products{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
     gap: 20px;
     justify-content: center; 
-
-    padding: 20px 0;
+    margin: 20px 0;
+    width: 50%;
 }
+.productsTitle {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    grid-column: 1 / -1; /* Giúp tiêu đề chiếm toàn bộ dòng nếu đang dùng grid */
+  }
+
+ 
 
 .product{
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     height: auto;
     background-color: white;
     position: relative;
@@ -258,6 +233,50 @@ top: 4px;
 
 .btnxct{
     text-decoration: none;
+    color: white;
+
+}
+
+.btn_xemthem{
+
+    display: flex;
+    justify-content: center;    
+
+    grid-column: 1 / -1; /* Giúp tiêu đề chiếm toàn bộ dòng nếu đang dùng grid */
+    
+}
+
+.btn_xemthem1{
+    border: 2px solid #224229;
+    border-radius: 50px;
+    padding: 10px;
+    width: 150px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.btn_xemthem_link{
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bolder;
+    cursor: pointer;
+    text-decoration: none;
+    color: #224229;
+    transition: all 0.3s ease-in-out;
+
+    
+}
+
+.btn_xemthem1:hover{
+    background-color: #00791C;
+    color: white;
+        border: 2px solid #00791C;
+
+}
+
+.btn_xemthem1:hover .btn_xemthem_link{
+    margin-right: 5px;
     color: white;
 
 }

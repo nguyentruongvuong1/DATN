@@ -1,10 +1,5 @@
 
-body{
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
-}
+
 
 .container{
     max-width: 1200px;
@@ -166,11 +161,6 @@ body{
     flex-wrap: wrap;
 }
 
-.product_btn a{
-    text-decoration: none;
-    color: white;
-}
-
 .product_btn p{
     margin: 0px;
 
@@ -182,7 +172,12 @@ height: 50px;
 width: 150px;
 border-radius: 50px;
 opacity: 0;
-
+font-size: 16px;
+font-weight: bolder;
+background-color: #224229;
+border-style: none;
+margin-bottom: 5px;
+cursor: pointer;
 }
 
 .pr_themvaogio button{
@@ -191,9 +186,11 @@ opacity: 0;
     width: 150px;
     border-radius: 50px;
     background-color: #D97904;
+border-style: none;
     opacity: 0;
-
-
+    font-size: 16px;
+font-weight: bolder;
+cursor: pointer;
     }
 
 .product:hover .pr_xemchitiet button, .product:hover .pr_themvaogio button{
@@ -201,7 +198,8 @@ opacity: 0;
 }
 
 .pr_xemchitiet button:hover{
-    color: white;
+    background-color: #00791C;
+   
 
 }
 
@@ -210,6 +208,7 @@ opacity: 0;
     background-color: #f29320;
     
 }
+
 
 
 
@@ -258,4 +257,10 @@ top: 4px;
 
 .pr_thongbao p{
     margin: 0px;
+}
+
+.btnxct{
+    text-decoration: none;
+    color: white;
+
 }

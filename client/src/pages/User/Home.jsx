@@ -4,6 +4,7 @@ import styles from '../../styles/User/home.module.css'
 import PrNew from "../../components/PrNew"
 import Cate from "../../components/Cate"
 import Banner from "../../components/Banner"
+import PrCate from "../../components/PrCate"
 export default function Home() {
     return (
        <main>
@@ -22,6 +23,7 @@ export default function Home() {
         </div>
       </section>
       <PrNew />
+      <PrCate />
         <section className={styles.bgwhite}>
         <div className={styles.container}>
         <div className={styles.lydochon}>

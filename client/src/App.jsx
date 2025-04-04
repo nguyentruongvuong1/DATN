@@ -16,7 +16,6 @@ import ProductC from "./pages/User/Profc";
 import VerifyOTP from "./pages/User/VetiFyOtp";
 import Payment from "./pages/User/Payment";
 
-
 import AdminVoucher from "./pages/Admin/Adminvoucher";
 import AdminCate from "./pages/Admin/Admincate";
 import AdminCharacteristic from "./pages/Admin/Admincharacteristic";

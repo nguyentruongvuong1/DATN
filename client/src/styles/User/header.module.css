@@ -1,9 +1,4 @@
-body{
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
-}
+
 
 
 
@@ -171,6 +166,7 @@ h1{
 
 .search i{
     font-size: 24px;
+    cursor: pointer;
 }
 
 .giohang i{
@@ -300,36 +296,60 @@ font-size: 14px;
 
   /* Search */
 
-  /* .overlay {
+  .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); 
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000; 
   }
+
+  .searchicon{
+    display: flex;
+  }
+  .searchicon_icon{
+    color: #ccc;
+    font-size: 18px;
+    position: absolute;
+    right: 0%;
+    margin-top: 10px;
+    margin-right: 25px;
+    font-size: 30px ;
+}
   .searchBox {
     position: fixed; 
-    top: 10%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 1px solid #ccc;
+    transform: translate(-50%, -50%);;
     padding: 5px;
     border-radius: 5px;
     z-index: 100;
+    width: 50%;
+    cursor: pointer;
   } 
   
   .searchInput {
-    width: 200px;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.396);
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 50px;
     outline: none;
+    color: #ccc;
+
+    border-style: none;
+    font-size: 20px;
+  }
+
+  .searchInput::placeholder {
+    color: #ccc;
+
+    font-size: 20px;
   }
 
   .close{
@@ -339,34 +359,55 @@ font-size: 14px;
     margin-right: 20px;
     right: 0%;
     z-index: 100;
-    color: red;
-  } */
+  }
+
+  .close button{
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+    border-style: none;
+    background-color: rgba(255, 255, 255, 0.012);
+  }
 
   /* sanr pham search */
 
-  .pr_search_container {
-    max-height: 400px; 
-    overflow-y: auto; 
-    border: 1px solid #ddd; 
-    padding: 10px;
-    background: #fff;
-    width: 50%;
-  }
+    .pr_search_container {
+        max-height: 400px; 
+        overflow-y: auto; 
+        padding: 10px;
+        width: 100%;
+    }
 
-.pr_search{
-    border: 1px solid red;
-    display: flex;
-  }
-
-.pr_search_img img{
-        width: 100px;
+    .pr_search{
+        display: flex;
         height: 100px;
+        margin-bottom: 5px;
     }
 
-.pr_search_info p{
-        margin: 0;
-    }
+    .pr_search_img img{
+            width: 100px;
+            height: 100px;
+        }
 
+        .pr_search_info{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 10px;
+        }    
+
+    .pr_search_info p{
+            margin: 0;
+            color: white;
+            font-size: 20px;
+        }
+    .pr_search a{
+            text-decoration: none;
+        }   
+
+    .pr_search:hover{
+        background-color: #fcf9f339;
+    }    
 
 
 

@@ -9,6 +9,7 @@ import {
   faMagnifyingGlass,
   faAngleDown,
   faChevronRight,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -230,9 +231,12 @@ const Header = () => {
       {ShowSearch && (
         <div className={styles.overlay}>
           <div className={styles.close}>
-            <button onClick={handleclose}>X</button>
+            <button onClick={handleclose}>
+              <FontAwesomeIcon icon={faXmark}/>
+            </button>
           </div>
           <div className={styles.searchBox}>
+            <div className={styles.searchicon}>
             <input
               type="text"
               placeholder="Tìm kiếm sản phẩm..."
@@ -242,23 +246,29 @@ const Header = () => {
               onFocus={() => setInputFocused(true)}
               onBlur={() => setInputFocused(false)}
             />
-          </div>
-          <div className={styles.pr_search_container}>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchicon_icon} />
+                  </div>
+
+<div className={styles.pr_search_container}>
             {searchpr && prfilter.length > 0
               ? prfilter.map((pr, index) => (
                   <div key={index} className={styles.pr_search}>
                     <div className={styles.pr_search_img}>
                       <img src={pr.images.split(",")[0]} alt="" />
                     </div>
-                    <div className={styles.pr_search_info}>
+                    <div className={styles.pr_search_info} onClick={handleclose}>
+                      <Link to={`/chi_tiet_san_pham/${pr.id}`}>
                       <p>{pr.name}</p>
                       <p>{pr.price}</p>
+                      </Link>
                     </div>
                   </div>
                 ))
               : searchpr &&
-                isInputFocused && <div>KHoong cos sanr phaamr nayf</div>}
+                isInputFocused && <div>Sản phẩm này không tồn tại </div>}
           </div>
+          </div>
+         
         </div>
       )}
     </header>
