@@ -1,4 +1,4 @@
-import styles from "../styles/User/banner.module.css";
+import styles from "../../styles/User/banner.module.css";
 import { useState, useEffect } from "react";
 import {Link} from "react-router-dom"
 export default function Banner() {

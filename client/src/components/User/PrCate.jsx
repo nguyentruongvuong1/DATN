@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../styles/User/prCate.module.css";
+import styles from "../../styles/User/prCate.module.css";
 import { faHeart, faEye, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { themPr } from "../CartSlice";
-import { checkLogin, updateCountPrlike } from "../AuthSlice";
+import { themPr } from "../../CartSlice";
+import { checkLogin, updateCountPrlike } from "../../AuthSlice";
 import "@ant-design/v5-patch-for-react-19";
 import { message } from "antd";
 import { Link } from "react-router-dom";

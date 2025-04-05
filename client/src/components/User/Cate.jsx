@@ -1,4 +1,4 @@
-import styles from'../styles/User/cate.module.css'
+import styles from'../../styles/User/cate.module.css'
 
 export default function Cate(){
   return(

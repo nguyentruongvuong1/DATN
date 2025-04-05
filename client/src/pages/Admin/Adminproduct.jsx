@@ -4,10 +4,15 @@ import { Menu, Search } from "lucide-react";
 import axios from "axios";
 import "../../styles/Admin/styleadmin.css";
 
-
 const AdminProduct = () => {
     const [products, setProducts] = useState([]);
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        name: "",
+        category_id: "",
+        characteristic_id: "",
+        type_ids: [],
+        price: "",
+    });
     const [showForm, setShowForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8); // Số sản phẩm mỗi trang
@@ -15,7 +20,6 @@ const AdminProduct = () => {
     const [isEdit, setIsEdit] = useState(false);
     const [categories, setCategories] = useState([]);
     const [characteristic, setCharacteristics] = useState([]);
-    const [typecate, setTypecates] = useState([]);
     const [filteredTypecate, setFilteredTypecate] = useState([]);
 
 
@@ -38,7 +42,7 @@ const AdminProduct = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [categoriesRes, characteristicsRes, typecatesRes] = await Promise.all([
+                const [categoriesRes, characteristicsRes] = await Promise.all([
                     axios.get("http://localhost:3000/admin/cate"),
                     axios.get("http://localhost:3000/admin/characteristic"),
                     axios.get("http://localhost:3000/admin/typecate")
@@ -46,7 +50,6 @@ const AdminProduct = () => {
 
                 setCategories(categoriesRes.data);
                 setCharacteristics(characteristicsRes.data);
-                setTypecates(typecatesRes.data);
 
             } catch (error) {
                 console.error("Lỗi khi lấy dữ liệu danh mục:", error);
@@ -55,35 +58,68 @@ const AdminProduct = () => {
         fetchData();
     }, []);
 
+    // Gọi API để lấy danh sách thể loại dựa trên category_id và characteristic_id
     useEffect(() => {
-        console.log("Danh mục được chọn (category_id):", formData?.category_id);
-        console.log("Danh sách thể loại ban đầu:", typecate);
+        const fetchTypeCates = async () => {
+            if (formData.characteristic_id && formData.category_id) {
+                console.log("Gọi API với:", formData.characteristic_id, formData.category_id);
+                try {
+                    const response = await axios.get(`http://localhost:3000/admin/typecate`, {
+                        params: {
+                            characteristic_id: formData.characteristic_id,
+                            category_id: formData.category_id
+                        }
+                    });
+                    console.log('Dữ liệu trả về từ API:', response.data);
+                    
+                    // Sửa: Truy cập typecates trực tiếp từ response.data
+                    if (Array.isArray(response.data.typecates)) {
+                        setFilteredTypecate(response.data.typecates);
+                    } else {
+                        console.error("Dữ liệu typecates không phải là mảng:", response.data.typecates);
+                        setFilteredTypecate([]);
+                    }
+                } catch (error) {
+                    console.error("Error fetching types:", error);
+                    setFilteredTypecate([]);
+                }
+            } else {
+                setFilteredTypecate([]);
+            }
+        };
     
-        if (formData?.category_id) {
-            const relatedTypecate = typecate.filter(tc => Number(tc.cate_id) === Number(formData.category_id));
-            console.log("Danh sách thể loại đã lọc:", relatedTypecate);
-            setFilteredTypecate(relatedTypecate);
-        } else {
-            setFilteredTypecate([]); // Nếu chưa chọn danh mục, reset danh sách thể loại
-        }
-    }, [formData?.category_id, typecate]);
+        fetchTypeCates();
+    }, [formData.characteristic_id, formData.category_id]);
     
 
 
+    useEffect(() => {
+        console.log("Cập nhật danh sách thể loại:", filteredTypecate); // Kiểm tra dữ liệu
+    }, [filteredTypecate]);
+
+
+    // Thêm hàm kiểm tra dữ liệu trả về
 
     const handleSave = async (e) => {
         e.preventDefault();
         try {
+            const payload = {
+                ...formData,
+                type_ids: formData.type_ids, // Gửi danh sách thể loại đã chọn
+            };
+
             if (isEdit) {
-                await axios.put(`http://localhost:3000/admin/product/${formData.id}`, formData);
+                await axios.put(`http://localhost:3000/admin/product/${formData.id}`, payload);
             } else {
-                await axios.post("http://localhost:3000/admin/product", formData);
+                await axios.post("http://localhost:3000/admin/product", payload);
             }
+
             setShowForm(false);
         } catch (error) {
             console.error("Lỗi khi lưu sản phẩm:", error);
         }
     };
+
 
     const handlePageChange = (page) => {
         setCurrentPage(Math.max(1, page)); // Đảm bảo trang nhỏ nhất là 1
@@ -111,8 +147,14 @@ const AdminProduct = () => {
         }));
     };
 
-
-
+    const handleCharacteristicChange = (e) => {
+        const characteristicId = e.target.value;
+        setFormData({
+            ...formData,
+            characteristic_id: characteristicId,
+            type_ids: [] // Reset khi thay đổi đặc điểm
+        });
+    };
 
 
     return (
@@ -135,7 +177,7 @@ const AdminProduct = () => {
                 <div className="recentOrders">
                     <div className="cardHeader">
                         <h2>Danh sách sản phẩm</h2>
-                        <button className="buttonAdd" onClick={() => { setShowForm(true); setIsEdit(false); setFormData({ code: '', discount_type: 'fixed', discount_value: 0, quantity: 1, end_date: '', status: 1 }); }}>Thêm Voucher</button>
+                        <button className="buttonAdd" onClick={() => { setShowForm(true); setIsEdit(false); setFormData({ code: '', discount_type: 'fixed', discount_value: 0, quantity: 1, end_date: '', status: 1 }); }}>Thêm Sản Phẩm</button>
                     </div>
                     <table>
                         <thead>
@@ -235,16 +277,11 @@ const AdminProduct = () => {
                                         ))}
                                     </select>
 
-
                                     <label>Đặc điểm:</label>
                                     <select
-                                        value={formData.characteristic_id || ""} // Hiển thị giá trị characteristic_id đã chọn
-                                        onChange={(e) => {
-                                            const characteristicId = e.target.value;
-                                            console.log("Đặc điểm được chọn:", characteristicId);
-                                            setFormData({ ...formData, characteristic_id: characteristicId, type_id: "" }); // Cập nhật formData khi chọn đặc điểm
-                                        }}
-                                        disabled={!formData.category_id} // Vô hiệu hóa dropdown nếu chưa chọn danh mục
+                                        value={formData.characteristic_id || ""}
+                                        onChange={handleCharacteristicChange}  // Use the declared function here
+                                        disabled={!formData.category_id}
                                     >
                                         <option value="">Chọn đặc điểm</option>
                                         {characteristic
@@ -257,21 +294,43 @@ const AdminProduct = () => {
                                     </select>
 
                                     <label>Thể loại:</label>
-                                    <select
-                                        value={formData?.type_id || ""}
-                                        onChange={(e) => setFormData({ ...formData, type_id: e.target.value })}
-                                        disabled={!formData?.category_id}
-                                    >
-                                        <option value="">Chọn thể loại</option>
-                                        {filteredTypecate.map(item => (
-                                            <option key={item.id} value={item.id}>{item.name}</option>
-                                        ))}
-                                    </select>
+                                    {formData.characteristic_id ? (
+                                        filteredTypecate.length > 0 ? (
+                                            <div className="checkbox-container">
+                                                {filteredTypecate.map(item => (
+                                                    <label key={item.id} className="type-item">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={formData.type_ids?.includes(item.id) || false}
+                                                            onChange={() => {
+                                                                setFormData(prev => ({
+                                                                    ...prev,
+                                                                    type_ids: prev.type_ids?.includes(item.id)
+                                                                        ? prev.type_ids.filter(id => id !== item.id)
+                                                                        : [...(prev.type_ids || []), item.id]
+                                                                }));
+                                                            }}  
+                                                        />
+                                                        <span className="type-name">{item.name}</span>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <div className="no-types-message">
+                                                <p>Không có thể loại nào cho đặc điểm đã chọn</p>
+                                                <p className="debug-info">
+                                                    Characteristic ID: {formData.characteristic_id}
+                                                </p>
+                                            </div>
+                                        )
+                                    ) : (
+                                        <p className="select-hint">Vui lòng chọn đặc điểm trước</p>
+                                    )}
+
 
 
                                     <label>Giá:</label>
                                     <input type="number" value={formData.price || ""} onChange={(e) => setFormData({ ...formData, price: e.target.value })} required />
-
                                     <button type="submit">Lưu</button>
                                     <button type="button" className="cancel-btn" onClick={() => setShowForm(false)}>Hủy</button>
                                 </form>

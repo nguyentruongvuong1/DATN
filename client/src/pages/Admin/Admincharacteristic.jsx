@@ -5,7 +5,6 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa"; // Import icon mũi 
 import { Link } from "react-router-dom";
 import "../../styles/Admin/styleadmin.css";
 
-
 const Admincharacteristic = () => {
     const [characteristic, setcharacteristics] = useState([]);
     const [editcharacteristic, setEditcharacteristic] = useState(null); // Lưu characteristic đang chỉnh sửa

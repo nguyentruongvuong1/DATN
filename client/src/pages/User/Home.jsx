@@ -1,10 +1,10 @@
-import Prdanhchoban from"../../components/Prdanhchoban"
-import PrSale from "../../components/PrSale"
+import Prdanhchoban from"../../components/User/Prdanhchoban"
+import PrSale from "../../components/User/PrSale"
 import styles from '../../styles/User/home.module.css'
-import PrNew from "../../components/PrNew"
-import Cate from "../../components/Cate"
-import Banner from "../../components/Banner"
-import PrCate from "../../components/PrCate"
+import PrNew from "../../components/User/PrNew"
+import Cate from "../../components/User/Cate"
+import Banner from "../../components/User/Banner"
+import PrCate from "../../components/User/PrCate"
 export default function Home() {
     return (
        <main>

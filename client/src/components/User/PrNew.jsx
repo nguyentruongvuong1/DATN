@@ -1,17 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from"../styles/User/prdanhchoban.module.css";
+import styles from"../../styles/User/prdanhchoban.module.css";
+import moment from "moment";
 import {
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { themPr } from "../CartSlice";
-import { checkLogin, updateCountPrlike } from "../AuthSlice";
+import { themPr } from "../../CartSlice";
+import { checkLogin, updateCountPrlike } from "../../AuthSlice";
 import "@ant-design/v5-patch-for-react-19";
 import { message } from "antd";
 import { Link } from "react-router-dom";
-import axios from "axios";
-export default function PrSale() {
+import axios from 'axios'
+
+export default function PrNew() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [prhot, setPrHot] = useState([]);
@@ -27,7 +29,7 @@ export default function PrSale() {
     const fetchData = async () => {
       try {
         // Lấy danh sách sản phẩm hot
-        const resHot = await fetch("http://localhost:3000/pr/prsale");
+        const resHot = await fetch("http://localhost:3000/pr/prnew");
         const hotData = await resHot.json();
         setPrHot(hotData);
 
@@ -92,7 +94,7 @@ export default function PrSale() {
       <section className={styles.container}>
         <div className={styles.title}>
           <div className={styles.title_name}>
-            <p>SẢN PHẨM ĐANG GIẢM GIÁ</p>
+            <p>SẢN PHẨM MỚI</p>
           </div>
         </div>
 
@@ -107,8 +109,8 @@ export default function PrSale() {
                   alt={pr.name}
                 />
               </div>
-              <div className={styles.pr_thongbao} style={{backgroundColor:'red'}}>
-                <p>{pr.sale}%</p>
+              <div className={styles.pr_thongbao} style={{backgroundColor:'#f29320'}}>
+                <p>New</p>
               </div>
               <div
                 className={`${styles.pr_tim} ${
@@ -117,9 +119,6 @@ export default function PrSale() {
                 onClick={() => toggleFavorite(pr.id)}
               >
                 <i
-                // style={{
-                //   color: likePr[pr.id] ? "red" : "white"
-                // }}
                 >
                   <FontAwesomeIcon
                     icon={faHeart}
@@ -130,7 +129,6 @@ export default function PrSale() {
                   />
                 </i>
               </div>
-            
               <div className={styles.product_btn}>
                 <div className={styles.pr_xemchitiet}>
                   <button onClick={() => View(pr.id)}>
@@ -157,8 +155,8 @@ export default function PrSale() {
               </div>
               <div className={styles.product_info}>
                 <p className={styles.product_price}>{pr.name}</p>
-                <p><del style={{color:'#ccc'}}>{Number(pr.price).toLocaleString("vi")} VNĐ </del></p>
-                <p>{Number(pr.price_sale).toLocaleString("vi")} VNĐ</p>
+                <p>{Number(pr.price).toLocaleString("vi")} VNĐ</p>
+                <p><strong>{moment(pr.create_date).format(' DD-MM-YYYY')}</strong></p>
               </div>
             </div>
           ))}

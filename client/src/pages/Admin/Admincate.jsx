@@ -6,8 +6,6 @@ import { FaArrowRight } from "react-icons/fa"; // Import icon mũi tên
 
 import "../../styles/Admin/styleadmin.css";
 
-
-
 const Admincate = () => {
   const [cate, setcates] = useState([]);
   const [editcate, setEditcate] = useState(null); // Lưu cate đang chỉnh sửa
@@ -192,8 +190,8 @@ const Admincate = () => {
 
                   <label>Trạng thái:</label>
                   <select name="status" value={editcate.status} onChange={handleChange}>
-                    <option value="1">Hoạt động</option>
-                    <option value="0">Hết hạn</option>
+                    <option value="1">Hiện</option>
+                    <option value="0">Ẩn</option>
                   </select>
 
                   <button type="submit">Lưu</button>
@@ -220,8 +218,8 @@ const Admincate = () => {
 
                   <label>Trạng thái:</label>
                   <select name="status" value={newcate.status} onChange={handleNewcateChange}>
-                    <option value="1">Hoạt động</option>
-                    <option value="0">Hết hạn</option>
+                    <option value="1">Hiện</option>
+                    <option value="0">Ẩn</option>
                   </select>
 
                   <button type="submit">Lưu</button>

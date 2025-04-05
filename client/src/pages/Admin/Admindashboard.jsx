@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 
-import "../../styles/Admin/styleadmin.css";
-
-import Bieudo from "./Bieudo"; // Đảm bảo đường dẫn đúng
+import "../../styles/Admin/styleadmin.css"; // Đảm bảo đường dẫn đúng
+import Bieudo from "../../components/Admin/Bieudo.jsx"; // Đảm bảo đường dẫn đúng
 
 
 const AdminDashboard = () => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Rate, message } from "antd";
-import styles from"../styles/User/prdetail.module.css";
+import styles from"../../styles/User/prdetail.module.css";
 
 export default function ProductReview() {
   const { id: productId } = useParams();

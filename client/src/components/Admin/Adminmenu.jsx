@@ -2,10 +2,9 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { 
   MdDashboard, MdCategory, MdWork, MdLocalOffer, 
-  MdReceipt, MdPerson, MdStar 
+  MdReceipt, MdPerson, MdStar, MdImage, MdArrowDropDown  
 } from "react-icons/md"; // Import icons từ react-icons
-import "../../styles/Admin/styleadmin.css";
-
+import "../../styles/ADmin/styleadmin.css"; // Đảm bảo đường dẫn đúng
 
 const AdminMenu = () => {
   const location = useLocation(); // Lấy đường dẫn hiện tại
@@ -13,12 +12,11 @@ const AdminMenu = () => {
   return (
     <div className="navigation">
       <ul>
-      <Link to="/">
         <li>
+          <Link to="/">
             <img src="./../images/logwhite.png" alt="" className="logo" width={250} height={40} />
+          </Link>
         </li>
-        </Link>
-
 
         <li className={location.pathname === "/admin/dashboard" ? "hovered" : ""}>
           <Link to="/admin/dashboard">
@@ -30,13 +28,14 @@ const AdminMenu = () => {
         <li className={`has-submenu ${location.pathname.startsWith("/admin/cate") ? "hovered" : ""}`}>
           <Link to="/admin/cate">
             <span className="icon"><MdCategory size={24} /></span>
-            <span className="title">Danh mục</span>
+            <span className="title">Danh mục </span>
+            <span className="submenu-icon"><MdArrowDropDown size={24} /></span>
           </Link>
-          <ul className="submenu">
-            <li><Link to="/admin/cate">Danh mục Chính</Link></li>
-            <li><Link to="/admin/characteristic">Đặc điểm</Link></li>
-            <li><Link to="/admin/typecate">Thể loại</Link></li>
-          </ul>
+          <div className="submenu">
+            <div><Link to="/admin/cate">Danh mục Chính</Link></div>
+            <div><Link to="/admin/characteristic">Đặc điểm</Link></div>
+            <div><Link to="/admin/typecate">Thể loại</Link></div>
+          </div>
         </li>
 
         <li className={location.pathname === "/admin/product" ? "hovered" : ""}>
@@ -67,10 +66,16 @@ const AdminMenu = () => {
           </Link>
         </li>
 
-        <li className={location.pathname === "/admin/comment" ? "hovered" : ""}>
-          <Link to="/admin/comment">
+        <li className={location.pathname === "/admin/reviews" ? "hovered" : ""}>
+          <Link to="/admin/reviews">
             <span className="icon"><MdStar size={24} /></span>
             <span className="title">Đánh Giá</span>
+          </Link>
+        </li>
+        <li className={location.pathname === "/admin/banner" ? "hovered" : ""}>
+          <Link to="/admin/banner">
+            <span className="icon"><MdImage size={24}  /></span>
+            <span className="title">Banner</span>
           </Link>
         </li>
       </ul>

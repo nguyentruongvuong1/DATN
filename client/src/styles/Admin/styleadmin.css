@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -61,7 +61,8 @@ body {
 .navigation ul li:hover,
 .navigation ul li.hovered {
     background: var(--white);
-    background-color: #ffffff; /* Màu xanh highlight */
+    background-color: #ffffff;
+    /* Màu xanh highlight */
     color: white;
 }
 
@@ -78,8 +79,9 @@ body {
     text-decoration: none;
     color: var(--white);
 }
-.navigation ul li a .logo{
-margin-top: 20px;
+
+.navigation ul li a .logo {
+    margin-top: 20px;
 }
 
 .navigation ul li:hover a,
@@ -138,14 +140,16 @@ margin-top: 20px;
     box-shadow: 35px -35px 0 10px var(--white);
     pointer-events: none;
 }
+
+/* menucon---------------------------------------------------------- */
+
 /* Cố định submenu nằm bên trong menu cha */
-.navigation ul li.has-submenu {
+.navigation .has-submenu {
     position: relative;
 }
 
 /* Ẩn menu con mặc định */
-/* Menu con */
-.navigation ul li .submenu {
+.navigation .submenu {
     position: absolute;
     top: 0;
     left: calc(100% + 5px);
@@ -153,79 +157,58 @@ margin-top: 20px;
     color: white;
     min-width: 220px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-    opacity: 0; /* Ẩn bằng opacity */
-    visibility: hidden; /* Không hiển thị */
+    opacity: 0;
+    /* Ẩn */
+    visibility: hidden;
+    /* Không hiển thị */
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    /* Đảm bảo hiển thị trên cùng */
 }
 
-/* Hiển thị menu con khi hover */
-.navigation ul li.has-submenu:hover .submenu {
-    opacity: 1; /* Hiển thị */
-    visibility: visible; /* Hiển thị */    
+/* Hiển thị menu con khi hover vào mục cha */
+.navigation .has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Định dạng các mục trong menu con */
-.navigation ul li .submenu li {
+.navigation .submenu div {
     padding: 12px 15px;
     cursor: pointer;
     transition: background 0.3s ease;
-    list-style: none;
     text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Viền nhẹ */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* Viền nhẹ */
 }
 
-.navigation ul li .submenu li a {
+/* Loại bỏ viền cuối cùng */
+.navigation .submenu div:last-child {
+    border-bottom: none;
+}
+
+/* Định dạng liên kết */
+.navigation .submenu div a {
     text-decoration: none;
-    color: #ffffff; /* Chữ trắng */
     display: block;
+    color: #ffffff;
     padding: 12px 16px;
     font-size: 14px;
     font-weight: 500;
     border-radius: 6px;
-    pointer-events: auto; /* Cho phép click */
-    z-index: 1000; /* Đảm bảo hiển thị trên cùng */
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 /* Hiệu ứng hover */
-/* .navigation ul li .submenu li:hover {
-    background: #08582E;}
-
-.navigation ul li .submenu li:hover a {
-    color: #ffffff;
-} */
-
-
-/* Hiển thị menu con khi hover vào mục cha */
-/* .navigation ul li:hover > .submenu,
-.navigation ul li .submenu:hover {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-} */
-
-/* Style từng mục trong submenu */
-.navigation ul li .submenu li {
-    list-style: none;
-    padding: 12px 15px; /* Đảm bảo chiều cao đồng nhất */
-    cursor: pointer;
-    transition: background 0.3s ease;
-    list-style: none;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-.navigation ul li .submenu li:last-child {
-    border-bottom: none;
-}
-
-.navigation ul li .submenu li:hover {
+.navigation .submenu div:hover {
     background: #0e4f27;
 }
 
-.navigation ul li .submenu li:hover a {
-    color: #ffffff;}
+.navigation .submenu div:hover a {
+    color: #ffffff;
+}
 
-
+/* menucon---------------------------------------------------------- */
 .main {
     position: absolute;
     width: calc(100% - 300px);
@@ -278,7 +261,8 @@ margin-top: 20px;
     height: 40px;
     border-radius: 40px;
     padding: 5px 20px;
-    padding-left: 40px; /* Chừa khoảng trống cho icon */
+    padding-left: 40px;
+    /* Chừa khoảng trống cho icon */
     font-size: 18px;
     outline: none;
     border: 1px solid var(--black2);
@@ -382,8 +366,8 @@ margin-top: 20px;
 
 .graphBox .box canvas {
     width: 100% !important;
-  }
-  
+}
+
 
 .details {
     position: relative;
@@ -553,8 +537,86 @@ margin-top: 20px;
     color: var(--white);
 }
 
+@media (max-width: 991px) {
+    .graphBox {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .navigation {
+        left: -300px;
+    }
+
+    .navigation.active {
+        width: 300px;
+        left: 0;
+    }
+
+    .main {
+        width: 100%;
+        left: 0;
+    }
+
+    .main.active {
+        left: 300px;
+    }
+
+    .cardBox {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .details {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .recentOrders {
+        overflow-x: auto;
+    }
+
+    .status.inprogress {
+        white-space: nowrap;
+    }
+}
 
 
+@media (max-width: 480px) {
+    .cardBox {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .cardHeader h2 {
+        font-size: 20px;
+    }
+
+    .user {
+        min-width: 40px;
+    }
+
+    .navigation {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+
+    .navigation.active {
+        width: 100%;
+        left: 0;
+    }
+
+    .toggle {
+        z-index: 10001;
+
+    }
+
+    .main.active .toggle {
+        position: fixed;
+        right: 0;
+        left: initial;
+        color: var(--white);
+    }
+}
 
 .details table {
     margin-top: 0%;
@@ -572,22 +634,27 @@ margin-top: 20px;
 
 
 .details table td .btn-edit {
-    background-color: #4CAF50 !important; /* Màu xanh */
+    background-color: #4CAF50 !important;
+    /* Màu xanh */
     color: white !important;
 }
 
 .details table td .btn-delete {
-    background-color: #f44336 !important; /* Màu đỏ */
+    background-color: #f44336 !important;
+    /* Màu đỏ */
     color: white !important;
 }
 
 .details table td .btn-navigate {
-    background-color: #FFC107 !important; /* Màu vàng */
-    color: black !important;    
+    background-color: #FFC107 !important;
+    /* Màu vàng */
+    color: black !important;
 }
+
 .details table td .btn-backpage {
-    background-color: #123fd1 !important; /* Màu sky */
-    color: white !important;    
+    background-color: #123fd1 !important;
+    /* Màu sky */
+    color: white !important;
 }
 
 .details table td button:first-child {
@@ -611,6 +678,12 @@ margin-top: 20px;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    /* Cho phép cuộn nếu modal quá dài */
+    padding: 20px;
 }
 
 /*   Khung chính của modal (dùng cho cả Form Sửa & Thêm) */
@@ -621,10 +694,15 @@ margin-top: 20px;
     transform: translate(-50%, -50%);
     background: white;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 100;
-    width: 450px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    /* Giới hạn chiều cao để tránh tràn màn hình */
+    overflow-y: auto;
+    /* Bật cuộn khi nội dung dài */
 }
 
 /*   Tiêu đề */
@@ -697,32 +775,35 @@ margin-top: 20px;
     background-color: green !important;
     color: white !important;
 }
+.xemdanhgia {
+    background: #f9ca3f !important;
+    color: var(--white);
+}
 
-/* menu con */
-
+/*   css phân trang--------------------------- */
 /* Paginate */
 .paginationContainer {
     display: flex;
     justify-content: center;
-  }
-  
-  /* Danh sách pagination */
-  .pagination {
+}
+
+/* Danh sách pagination */
+.pagination {
     display: flex;
     list-style: none;
     padding: 0;
     gap: 8px;
     align-items: center;
-  }
-  
-  /* Các nút trang và điều hướng */
-  .pageItem {
+}
+
+/* Các nút trang và điều hướng */
+.pageItem {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .pageLink {
+}
+
+.pageLink {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -734,34 +815,60 @@ margin-top: 20px;
     font-size: 14px;
     text-decoration: none;
     transition: all 0.3s;
-  }
-  
-  /* Nút Previous và Next */
-  .previousLink,
-  .nextLink {
+}
+
+/* Nút Previous và Next */
+.previousLink,
+.nextLink {
     padding: 0 8px;
     width: auto;
-  }
-  
-  /* Trang hiện tại */
-  .active .pageLink {
+}
+
+/* Trang hiện tại */
+.active .pageLink {
     background-color: #28a745;
     color: white;
     border-color: #28a745;
-  }
-  
-  /* Hiệu ứng hover */
-  .pageLink:hover:not(.active .pageLink) {
+}
+
+/* Hiệu ứng hover */
+.pageLink:hover:not(.active .pageLink) {
     background-color: #f5f5f5;
     border-color: #d9d9d9;
-  }
-  
-  /* Dấu ba chấm (ellipsis) */
-  .break {
+}
+
+/* Dấu ba chấm (ellipsis) */
+.break {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 32px;
     height: 32px;
     color: #333;
-  }
+}
+
+/* CheckBox---------------------- */
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* Chia thành 4 cột */
+    gap: 15px;
+    /* Khoảng cách giữa các ô */
+    padding: 10px;
+    max-width: 100%;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.small-checkbox {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}

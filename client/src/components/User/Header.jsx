@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from"../styles/User/header.module.css";
+import styles from"../../styles/User/header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -13,8 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCountPrLike } from "../AuthSlice";
-import { thoat } from "../AuthSlice";
+import { fetchCountPrLike } from "../../AuthSlice";
+import { thoat } from "../../AuthSlice";
 import '@ant-design/v5-patch-for-react-19';
 import { message } from 'antd'; 
 

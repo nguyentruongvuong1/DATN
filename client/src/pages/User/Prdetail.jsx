@@ -6,7 +6,7 @@ import { themPr } from "../../CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "@ant-design/v5-patch-for-react-19";
 import { message } from "antd";
-import Comment from "../../components/Comment";
+import Comment from "../../components/User/Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { checkLogin, updateCountPrlike } from "../../AuthSlice";

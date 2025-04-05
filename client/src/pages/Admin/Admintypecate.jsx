@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Search } from "lucide-react";
+import ReactPaginate from "react-paginate";
 
 import axios from "axios";
 import "../../styles/Admin/styleadmin.css";
-
 
 const AdminTypecate = () => {
     const [typecate, setTypecate] = useState([]);
     const [editTypecate, setEditTypecate] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [totalItems, setTotalItems] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 8;
     const [newTypecate, setNewTypecate] = useState({
         characteristic_id: "",
         name: "",
@@ -18,7 +21,8 @@ const AdminTypecate = () => {
 
     useEffect(() => {
         fetchTypecate();
-    }, []);
+    }, [currentPage]); // Không có setState trong cùng useEffect này
+    
 
     const [characteristic, setCharacteristics] = useState([]);
 
@@ -37,8 +41,9 @@ const AdminTypecate = () => {
 
     const fetchTypecate = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/admin/typecate");
-            setTypecate(response.data);
+            const response = await axios.get(`http://localhost:3000/admin/typecate?page=${currentPage + 1}&limit=${itemsPerPage}`);
+            setTypecate(response.data.typecates);
+            setTotalItems(response.data.total);
         } catch (error) {
             console.error("Lỗi khi lấy dữ liệu:", error);
         }
@@ -104,6 +109,17 @@ const AdminTypecate = () => {
         }
     };
 
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+    
+    
+    
+    
+    
+    
+    
+
     return (
         <div className="main">
             <div className="topbar">
@@ -155,7 +171,29 @@ const AdminTypecate = () => {
                             ))}
                         </tbody>
                     </table>
-
+                    {totalItems > itemsPerPage && (
+                        <div className="paginationContainer">
+                            <ReactPaginate
+                                breakLabel="⋯"
+                                nextLabel=">"
+                                previousLabel="<"
+                                onPageChange={handlePageChange}
+                                pageRangeDisplayed={2}
+                                marginPagesDisplayed={1}
+                                pageCount={Math.ceil(totalItems / itemsPerPage)}
+                                containerClassName="pagination"
+                                pageClassName="pageItem"
+                                pageLinkClassName="pageLink"
+                                previousClassName="pageItem"
+                                previousLinkClassName="pageLink previousLink"
+                                nextClassName="pageItem"
+                                nextLinkClassName="pageLink nextLink"
+                                activeClassName="active"
+                                breakClassName="breakItem"
+                                forcePage={currentPage}
+                                />
+                        </div>
+                    )}
 
                     {editTypecate && (
                         <>
@@ -171,7 +209,7 @@ const AdminTypecate = () => {
                                     <input type="text" name="image" value={editTypecate.image} onChange={handleChange} />
                                     <label>Content:</label>
                                     <textarea name="content" value={editTypecate.content} onChange={handleChange} required></textarea>                                <button type="submit">Lưu</button>
-                                    <button type="button" onClick={() => setEditTypecate(null)}>Hủy</button>
+                                    <button type="button" className="cancel-btn" onClick={() => setEditTypecate(null)}>Hủy</button>
                                 </form>
                             </div>
                         </>
@@ -205,7 +243,8 @@ const AdminTypecate = () => {
                                     <input type="text" name="content" value={newTypecate.content} onChange={handleNewTypecateChange} required />
 
                                     <button type="submit">Lưu</button>
-                                    <button type="button" onClick={() => setShowAddForm(false)}>Hủy</button>
+                                    <button type="button" className="cancel-btn" onClick={() => setShowAddForm(false)}>Hủy</button>
+
                                 </form>
 
                             </div>

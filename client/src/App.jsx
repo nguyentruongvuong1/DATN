@@ -21,7 +21,8 @@ import AdminCate from "./pages/Admin/Admincate";
 import AdminCharacteristic from "./pages/Admin/Admincharacteristic";
 import AdminTypecate from "./pages/Admin/Admintypecate"
 import AdminProduct from "./pages/Admin/Adminproduct";
-import AdminComment from "./pages/Admin/Admincomment";
+import AdminReviews from "./pages/Admin/Adminreviews";
+import AdminBanner from "./pages/Admin/Adminbanner";
 
 function App() {
   return (
@@ -52,7 +53,8 @@ function App() {
           <Route path="characteristic" element={<AdminCharacteristic />} />
           <Route path="typecate" element={<AdminTypecate />} />
           <Route path="product" element={<AdminProduct />} />
-          <Route path="comment" element={<AdminComment />} />
+          <Route path="reviews" element={<AdminReviews />} />
+          <Route path="banner" element={<AdminBanner />} />
         </Route>
       </Routes>
     </BrowserRouter>

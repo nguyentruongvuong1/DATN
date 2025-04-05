@@ -1,4 +1,4 @@
-import styles from "../styles/User/search.module.css";
+import styles from "../../styles/User/search.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";

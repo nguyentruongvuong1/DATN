@@ -1,19 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from"../styles/User/prdanhchoban.module.css";
+import styles from"../../styles/User/prdanhchoban.module.css";
 import {
   faHeart,
-  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { themPr } from "../CartSlice";
-import { checkLogin, updateCountPrlike } from "../AuthSlice";
+import { themPr } from "../../CartSlice";
+import { checkLogin, updateCountPrlike } from "../../AuthSlice";
 import "@ant-design/v5-patch-for-react-19";
 import { message } from "antd";
 import { Link } from "react-router-dom";
-import axios from 'axios'
-
-export default function Prdanhchoban() {
+import axios from "axios";
+export default function PrSale() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [prhot, setPrHot] = useState([]);
@@ -29,7 +27,7 @@ export default function Prdanhchoban() {
     const fetchData = async () => {
       try {
         // Lấy danh sách sản phẩm hot
-        const resHot = await fetch("http://localhost:3000/pr/prhot");
+        const resHot = await fetch("http://localhost:3000/pr/prsale");
         const hotData = await resHot.json();
         setPrHot(hotData);
 
@@ -85,16 +83,16 @@ export default function Prdanhchoban() {
     }
   };
 
-  // Tăng lượt xem của sản phẩm
+  // Tang view
   const View = async (id) => await axios.post(`http://localhost:3000/pr/view/${id}`); 
+
 
   return (
     <main className={styles.bgmain}>
       <section className={styles.container}>
         <div className={styles.title}>
-
           <div className={styles.title_name}>
-            <p>SẢN PHẨM DÀNH CHO BẠN</p>
+            <p>SẢN PHẨM ĐANG GIẢM GIÁ</p>
           </div>
         </div>
 
@@ -109,8 +107,8 @@ export default function Prdanhchoban() {
                   alt={pr.name}
                 />
               </div>
-              <div className={styles.pr_thongbao}>
-                <p>Hot</p>
+              <div className={styles.pr_thongbao} style={{backgroundColor:'red'}}>
+                <p>{pr.sale}%</p>
               </div>
               <div
                 className={`${styles.pr_tim} ${
@@ -118,22 +116,21 @@ export default function Prdanhchoban() {
                 }`}
                 onClick={() => toggleFavorite(pr.id)}
               >
-                <i>
+                <i
+                // style={{
+                //   color: likePr[pr.id] ? "red" : "white"
+                // }}
+                >
                   <FontAwesomeIcon
                     icon={faHeart}
                     style={{
                       color: likePr[pr.id] ? "red" : "white"
+                      
                     }}
                   />
                 </i>
               </div>
-              <div className={styles.pr_view}>
-                <i>
-                  {" "}
-                  <FontAwesomeIcon icon={faEye} />{" "}
-                </i>
-                <p>{pr.view}</p>
-              </div>
+            
               <div className={styles.product_btn}>
                 <div className={styles.pr_xemchitiet}>
                   <button onClick={() => View(pr.id)}>
@@ -160,7 +157,8 @@ export default function Prdanhchoban() {
               </div>
               <div className={styles.product_info}>
                 <p className={styles.product_price}>{pr.name}</p>
-                <p>{Number(pr.price).toLocaleString("vi")} VNĐ</p>
+                <p><del style={{color:'#ccc'}}>{Number(pr.price).toLocaleString("vi")} VNĐ </del></p>
+                <p>{Number(pr.price_sale).toLocaleString("vi")} VNĐ</p>
               </div>
             </div>
           ))}

@@ -9,7 +9,7 @@ import "@ant-design/v5-patch-for-react-19";
 import { message } from "antd";
 import { themPr } from "../../CartSlice";
 import ReactPaginate from "react-paginate";
-import Search from "../../components/search";
+import Search from "../../components/User/search";
 
 const ProductPage = () => {
   let { cate_id } = useParams();
