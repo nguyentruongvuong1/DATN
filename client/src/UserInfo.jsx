@@ -3,12 +3,11 @@ import { useDispatch } from "react-redux";
 import { checkLogin } from "./AuthSlice";
 
 export default function UserInfo() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(checkLogin());
+  useEffect(() => {
+    dispatch(checkLogin());
+  }, [dispatch]);
 
-    }, [dispatch]);
-
-    return null;
+  return null; // Không render gì cả
 }

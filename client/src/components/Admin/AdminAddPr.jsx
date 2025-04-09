@@ -149,7 +149,7 @@ useEffect(() => {
       </div>
   
       <div className="form-group">
-        <label>Danh mục (Cate):</label>
+        <label>Danh mục:</label>
         <select className="form-control" name="cate_id" value={formData.cate_id} onChange={handleInputChange} required>
           <option value="">-- Chọn danh mục --</option>
           {cates.map(cate => (
@@ -161,7 +161,7 @@ useEffect(() => {
     
       {characteristic.length > 0 && (
   <div className="form-group">
-    <label>Đặc điểm (Characteristics):</label>
+    <label>Đặc điểm:</label>
     <select
   className="form-control"
   name="characteristic_id"
@@ -180,7 +180,7 @@ useEffect(() => {
   
   {typeCates.length > 0 && (
   <div className="form-group checkbox-group">
-    <label>Loại (Type Cate):</label><br />
+    <label>Loại:</label><br />
     {typeCates.map(type => (
       <label key={type.id}>
         <input

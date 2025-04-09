@@ -33,9 +33,10 @@ import ProtectAdmin from "./ProtectAdmin";
 function App() {
   return (
     <BrowserRouter>
+<UserInfo />
       <Routes>
         {/* Route dành cho User */}
-        <Route path="/" element={<> <UserInfo /><UserLayout /> </>}>
+        <Route path="/" element={<> <UserLayout /> </>}>
           <Route index element={<Home />} />
           <Route path="/dangnhap" element={<Login />} />
           <Route path="/dangky" element={<Register />} />
@@ -52,7 +53,7 @@ function App() {
         </Route>
 
         {/* Route dành cho Admin */}
-        <Route path="/admin" element={<>  <UserInfo /> <ProtectAdmin>  <AdminLayout /> </ProtectAdmin>  </> }>
+        <Route path="/admin" element={<> <ProtectAdmin>  <AdminLayout /> </ProtectAdmin>  </> }>
           <Route index element={<AdminDashboard />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="voucher" element={<AdminVoucher />} />
