@@ -54,7 +54,7 @@ const ProductC = () => {
   const fetchTypeCates = async (cateId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/c/type_cate_by_cate/${cateId}`
+        `${import.meta.env.VITE_API_URL}/c/type_cate_by_cate/${cateId}`
       );
       const data = await response.json();
       setTypeCatesByCate((prev) => ({
@@ -87,7 +87,7 @@ const ProductC = () => {
 
   // Lấy tất cả cate của type_cate
   useEffect(() => {
-    fetch("http://localhost:3000/c/categories_with_type_cate")
+    fetch(`${import.meta.env.VITE_API_URL}/c/categories_with_type_cate`)
       .then((res) => res.json())
       .then((data) => {
         setcate(data);
@@ -99,7 +99,7 @@ const ProductC = () => {
 
   // Lấy cate dựa trên id
   useEffect(() => {
-    fetch(`http://localhost:3000/c/cate/${cate_id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/c/cate/${cate_id}`)
       .then((res) => res.json())
       .then((data) => setinfocate(data));
   }, [cate_id]);
@@ -113,7 +113,7 @@ const ProductC = () => {
       setIsLoading(true)
       try {
         const products = await fetch(
-          `http://localhost:3000/pr/products-by-cate/${cate_id}?sort=${sortPr}&page=${currentPage}&limit=${itemsPerPage}&minPrice=${selectedMin}&maxPrice=${selectedMax}`
+          `${import.meta.env.VITE_API_URL}/pr/products-by-cate/${cate_id}?sort=${sortPr}&page=${currentPage}&limit=${itemsPerPage}&minPrice=${selectedMin}&maxPrice=${selectedMax}`
         );
         const response = await products.json();
         Setproduct(response.products || response);
@@ -121,7 +121,7 @@ const ProductC = () => {
 
         if (user && user.id) {
           const resFav = await fetch(
-            `http://localhost:3000/pr/user-favorite/${user.id}`
+            `${import.meta.env.VITE_API_URL}/pr/user-favorite/${user.id}`
           );
           const likedProductIds = await resFav.json();
 
@@ -148,7 +148,7 @@ const ProductC = () => {
       const fetchPriceRange = async () => {
         try {
           const res = await fetch(
-            `http://localhost:3000/pr/price-range-cate/${cate_id}`
+            `${import.meta.env.VITE_API_URL}/pr/price-range-cate/${cate_id}`
           );
           const data = await res.json();
           setMinPrice(data.min_price);
@@ -176,7 +176,7 @@ const ProductC = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/pr/toggle-favorite", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/pr/toggle-favorite`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id, pr_id }),

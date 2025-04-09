@@ -21,7 +21,7 @@ const Admincate = () => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:3000/adminc/cate")
+    axios.get(`${import.meta.env.VITE_API_URL}/adminc/cate`)
       .then((response) => {
         setcates(response.data);
       })
@@ -32,7 +32,7 @@ const Admincate = () => {
 
   const fetchcates = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/adminc/cate");
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/adminc/cate`);
       setcates(response.data);
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu:", error);
@@ -42,7 +42,7 @@ const Admincate = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       axios
-        .get(`http://localhost:3000/adminc/cate?search=${encodeURIComponent(searchTerm)}`)
+        .get(`${import.meta.env.VITE_API_URL}/adminc/cate?search=${encodeURIComponent(searchTerm)}`)
         .then((res) => setcates(res.data))
         .catch((err) => console.error("Lỗi tìm kiếm:", err));
     }, 300); // debounce 300ms
@@ -53,7 +53,7 @@ const Admincate = () => {
     if (!window.confirm("Bạn có chắc muốn xóa cate này không?")) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/adminc/cate/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/adminc/cate/${id}`, {
         method: "DELETE",
       });
 
@@ -92,7 +92,7 @@ const Admincate = () => {
     if (newcate.image_content) formData.append("image_content", newcate.image_content);
 
     try {
-      const response = await fetch(`http://localhost:3000/adminc/cate`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/adminc/cate`, {
         method: "POST",
         body: formData,
       });
@@ -151,7 +151,7 @@ const Admincate = () => {
         formData.append("image_content", editcate.newImageContent);
       }
 
-      const response = await fetch(`http://localhost:3000/adminc/cate/${editcate.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/adminc/cate/${editcate.id}`, {
         method: "PUT",
         body: formData,
       });
@@ -219,7 +219,7 @@ const Admincate = () => {
                   <td><img style={{ width: '50px', height: '50px' }} src={
                         cate.image &&
                         cate.image.startsWith("../../public/images")
-                          ? `http://localhost:3000/${cate.image}`
+                          ? `${import.meta.env.VITE_API_URL}/${cate.image}`
                           : cate.image 
                       } alt="" /></td>
                   <td>{cate.name}</td>
@@ -227,7 +227,7 @@ const Admincate = () => {
                   <td><img style={{ width: '50px', height: '50px' }} src={
                         cate.image_content &&
                         cate.image_content.startsWith("../../public/images")
-                          ? `http://localhost:3000/${cate.image_content}`
+                          ? `${import.meta.env.VITE_API_URL}/${cate.image_content}`
                           : cate.image_content 
                       }
                     alt="" /></td>
@@ -257,11 +257,11 @@ const Admincate = () => {
                   <input type="text" name="content" value={editcate.content || ""} onChange={handleChange} required />
 
                   <label>Ảnh hiện tại:</label>
-                  <img src={`http://localhost:3000/public/${editcate.image}`} alt="Ảnh" width="60" />
+                  <img src={`${import.meta.env.VITE_API_URL}/public/${editcate.image}`} alt="Ảnh" width="60" />
                   <input type="file" name="image" accept="image/*" onChange={(e) => setEditcate({ ...editcate, newImage: e.target.files[0] })} />
 
                   <label>Ảnh nội dung hiện tại:</label>
-                  <img src={`http://localhost:3000/public/${editcate.image_content}`} alt="Ảnh ND" width="60" />
+                  <img src={`${import.meta.env.VITE_API_URL}/public/${editcate.image_content}`} alt="Ảnh ND" width="60" />
                   <input type="file" name="image_content" accept="image/*" onChange={(e) => setEditcate({ ...editcate, newImageContent: e.target.files[0] })} />
 
                   <label>Trạng thái:</label>
@@ -276,7 +276,7 @@ const Admincate = () => {
               </div>
             </>
           )}
-          
+
 
 
           {/* Form thêm cate */}

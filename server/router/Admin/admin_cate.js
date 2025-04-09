@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../../database/db'); // Đảm bảo đã sử dụng mysql2/promise
 var upload = require('../../multerConfig');
-
+require('dotenv').config();
+const baseUrl = process.env.BASE_URL; // Lấy từ .env
 
 // API CATE------------------------------------------------------------------------------------------------------------------------------------------
 // API lấy danh sách cate
@@ -66,7 +67,7 @@ router.put('/cate/:id', upload.fields([
                 fs.unlinkSync(oldImagePath);
             }
 
-            image = `http://localhost:3000/public/images/${newFilename}`; // chỉ lưu path tương đối vào DB
+            image = `${baseUrl}/public/images/${newFilename}`; // chỉ lưu path tương đối vào DB
         }
 
         // --- Xử lý ảnh 'image_content' ---
@@ -79,7 +80,7 @@ router.put('/cate/:id', upload.fields([
                 fs.unlinkSync(oldImagePath);
             }
 
-            image_content = `http://localhost:3000/public/images/${newFilename}`;
+            image_content = `${baseUrl}/public/images/${newFilename}`;
         }
 
         // --- Update DB ---
@@ -114,8 +115,8 @@ router.post('/cate', upload.fields([
         const image_content = req.files?.image_content?.[0];
 
         // ✅ Lưu đúng chuẩn path tương đối (giống PUT)
-        const imagePath = image ? `http://localhost:3000/public/images/${image.filename}` : null;
-        const imageContentPath = image_content ? `http://localhost:3000/public/images/${image_content.filename}` : null;
+        const imagePath = image ? `${baseUrl}/public/images/${image.filename}` : null;
+        const imageContentPath = image_content ? `${baseUrl}/public/images/${image_content.filename}` : null;
 
         // const imagePath = image ? `../../public/images/${image.filename}` : null;
         // const imageContentPath = image_content ? `../../public/images/${image_content.filename}` : null;
@@ -322,7 +323,7 @@ router.put('/typecate/:id', upload.single("image"), async (req, res) => {
         }
 
         const oldData = rows[0];
-        const updatedImage = file ? `http://localhost:3000/public/images/${file.filename}` : oldData.image;
+        const updatedImage = file ? `${baseUrl}/public/images/${file.filename}` : oldData.image;
         // Nếu có ảnh mới -> xóa ảnh cũ
         if (file && oldData.image) {
             try {
@@ -360,7 +361,7 @@ router.put('/typecate/:id', upload.single("image"), async (req, res) => {
 // API thêm typecate
 router.post('/typecate', upload.single('image'), async (req, res) => {
     const { characteristic_id, name, content } = req.body;
-    const image = req.file ? `http://localhost:3000/public/images/${req.file.filename}` : null;
+    const image = req.file ? `${baseUrl}/public/images/${req.file.filename}` : null;
 
     if (!characteristic_id || !name) {
         return res.status(400).json({ message: "ID đặc điểm và tên không được để trống" });

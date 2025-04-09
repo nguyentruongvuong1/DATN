@@ -103,7 +103,7 @@ export default function Cart() {
 
   const applyVoucher = async () => {
     try {
-      const res = await axios.post(`http://localhost:3000/checkvoucher`, 
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/checkvoucher`, 
         { code: VoucherCode });
       const { discount_type, discount_value } = res.data;
 

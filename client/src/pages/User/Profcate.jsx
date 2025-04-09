@@ -49,7 +49,7 @@ const ProductPage = () => {
 
   // Lấy tất cả type_cate của cate
   useEffect(() => {
-    fetch("http://localhost:3000/c/categories_with_type_cate")
+    fetch(`${import.meta.env.VITE_API_URL}/c/categories_with_type_cate`)
       .then((res) => res.json())
       .then((data) => {
         setcate(data);
@@ -59,7 +59,7 @@ const ProductPage = () => {
 
   // Lấy type_cate dựa vào id
   useEffect(() => {
-    fetch(`http://localhost:3000/c/type_cate/${cate_id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/c/type_cate/${cate_id}`)
       .then((res) => res.json())
       .then((data) => Settype_cate(data));
   }, [cate_id]);
@@ -78,7 +78,7 @@ const ProductPage = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const url = `http://localhost:3000/pr/products-by-type/${cate_id}?sort=${sortPr}&page=${currentPage}&limit=${itemsPerPage}&minPrice=${selectedMin}&maxPrice=${selectedMax}`;
+        const url = `${import.meta.env.VITE_API_URL}/pr/products-by-type/${cate_id}?sort=${sortPr}&page=${currentPage}&limit=${itemsPerPage}&minPrice=${selectedMin}&maxPrice=${selectedMax}`;
 
         const products = await fetch(url);
         const response = await products.json();
@@ -87,7 +87,7 @@ const ProductPage = () => {
 
         if (user && user.id) {
           const resFav = await fetch(
-            `http://localhost:3000/pr/user-favorite/${user.id}`
+            `${import.meta.env.VITE_API_URL}/pr/user-favorite/${user.id}`
           );
           const likedProductIds = await resFav.json();
 
@@ -121,7 +121,7 @@ const ProductPage = () => {
     const fetchPriceRange = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/pr/price-range_typecate/${cate_id}`
+          `${import.meta.env.VITE_API_URL}/pr/price-range_typecate/${cate_id}`
         );
         const data = await res.json();
         setMinPrice(data.min_price);
@@ -147,7 +147,7 @@ const ProductPage = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/pr/toggle-favorite", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/pr/toggle-favorite`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id, pr_id }),

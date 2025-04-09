@@ -33,7 +33,7 @@ export default function Prdetail() {
 
   useEffect(() => {
     const fetchCate = async () => {
-      const res = await fetch(`http://localhost:3000/c/namecate/${id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/c/namecate/${id}`);
       const data = await res.json();
       setcate(data);
     };
@@ -44,7 +44,7 @@ export default function Prdetail() {
   useEffect(() => {
     const fetchPr = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/pr/detailPr/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/pr/detailPr/${id}`);
         const data = await res.json();
 
         if (data) {
@@ -68,13 +68,13 @@ export default function Prdetail() {
   useEffect(() => {
     const fetchprlq = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/pr/prlq/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/pr/prlq/${id}`);
         const data = await res.json();
         setprlq(data);
 
         if (user && user.id) {
           const resFav = await fetch(
-            `http://localhost:3000/pr/user-favorite/${user.id}`
+            `${import.meta.env.VITE_API_URL}/pr/user-favorite/${user.id}`
           );
           const likedProductIds = await resFav.json();
 
@@ -97,7 +97,7 @@ export default function Prdetail() {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/reviews/product-reviews?productId=${id}`
+          `${import.meta.env.VITE_API_URL}/reviews/product-reviews?productId=${id}`
         );
         setReviews(res.data.data);
       } catch (error) {
@@ -112,7 +112,7 @@ export default function Prdetail() {
     const fetchtotalStar = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/reviews/average-rating/${id}`
+          `${import.meta.env.VITE_API_URL}/reviews/average-rating/${id}`
         );
         const data = await res.json();
         // Giả sử data có cấu trúc { average_rating: 4.5 }
@@ -136,7 +136,7 @@ export default function Prdetail() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/pr/toggle-favorite", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/pr/toggle-favorite`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id, pr_id }),
@@ -208,7 +208,7 @@ export default function Prdetail() {
   };
 
    // Tang view
-   const View = async (id) => await axios.post(`http://localhost:3000/pr/view/${id}`); 
+   const View = async (id) => await axios.post(`${import.meta.env.VITE_API_URL}/pr/view/${id}`); 
 
 
   // Nếu chưa có dữ liệu, hiển thị thông báo

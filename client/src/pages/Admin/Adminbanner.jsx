@@ -19,7 +19,7 @@ const AdminBanner = () => {
   const fetchBanners = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/admin/banners?page=${currentPage}&limit=${itemsPerPage}`
+        `${import.meta.env.VITE_API_URL}/admin/banners?page=${currentPage}&limit=${itemsPerPage}`
       );
       setBanners(response.data.banners);
       setTotalBanners(response.data.total);
@@ -31,7 +31,7 @@ const AdminBanner = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc muốn xóa banner này không?")) return;
     try {
-      await axios.delete(`http://localhost:3000/admin/banner/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin/banner/${id}`);
       fetchBanners();
     } catch (error) {
       console.error("Lỗi khi xóa banner:", error);
@@ -49,14 +49,14 @@ const AdminBanner = () => {
 
       if (isEdit) {
         await axios.put(
-          `http://localhost:3000/admin/banner/${formData.id}`,
+          `${import.meta.env.VITE_API_URL}/admin/banner/${formData.id}`,
           form,
           {
             headers: { "Content-Type": "multipart/form-data" },
           }
         );
       } else {
-        await axios.post("http://localhost:3000/admin/banner", form, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/admin/banner`, form, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       }
@@ -211,7 +211,7 @@ const AdminBanner = () => {
                     src={
                       formData.image instanceof File
                         ? URL.createObjectURL(formData.image)
-                        : `http://localhost:3000/${formData.image}`
+                        : `${import.meta.env.VITE_API_URL}/${formData.image}`
                     }
                     alt="Preview"
                     style={{ width: "150px", marginTop: "10px" }}

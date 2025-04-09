@@ -21,7 +21,7 @@ const AdminVoucher = () => {
     const fetchVouchers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/admin/vouchers?page=${currentPage}&limit=${itemsPerPage}`
+          `${import.meta.env.VITE_API_URL}/admin/vouchers?page=${currentPage}&limit=${itemsPerPage}`
         );
         setVouchers(response.data.vouchers || response.data);
         setTotalVouchers(response.data.total || response.data.length);
@@ -36,7 +36,7 @@ const AdminVoucher = () => {
   const fetchVouchers = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/admin/vouchers?page=${currentPage}&limit=${itemsPerPage}`
+        `${import.meta.env.VITE_API_URL}/admin/vouchers?page=${currentPage}&limit=${itemsPerPage}`
       );
       setVouchers(data.vouchers || []);
       setTotalVouchers(data.total || 0);
@@ -49,7 +49,7 @@ const AdminVoucher = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc muốn xóa voucher này không?")) return;
     try {
-      await axios.delete(`http://localhost:3000/admin/voucher/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin/voucher/${id}`);
       fetchVouchers();
     } catch (error) {
       console.error("Lỗi khi xóa voucher:", error);
@@ -60,9 +60,9 @@ const AdminVoucher = () => {
     e.preventDefault();
     try {
       if (isEdit) {
-        await axios.put(`http://localhost:3000/admin/voucher/${formData.id}`, formData);
+        await axios.put(`${import.meta.env.VITE_API_URL}/admin/voucher/${formData.id}`, formData);
       } else {
-        await axios.post("http://localhost:3000/admin/voucher", formData);
+        await axios.post("${import.meta.env.VITE_API_URL}/admin/voucher", formData);
       }
       fetchVouchers();
       setShowForm(false);

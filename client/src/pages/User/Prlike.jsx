@@ -29,7 +29,7 @@ export default function Favorite_Pr() {
   const fetchFavoriteUser = async () => {
     try {
       const rs = await fetch(
-        `http://localhost:3000/pr/favorite_user/${user.id}`
+        `${import.meta.env.VITE_API_URL}/pr/favorite_user/${user.id}`
       );
       const favoritePr = await rs.json();
       setpr(favoritePr);
@@ -43,7 +43,7 @@ export default function Favorite_Pr() {
     if (!user || !user.id) return;
   
     try {
-      const res = await fetch("http://localhost:3000/pr/toggle-favorite", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/pr/toggle-favorite`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function Favorite_Pr() {
   };
 
     // Tăng lượt xem của sản phẩm
-    const View = async (id) => await axios.post(`http://localhost:3000/pr/view/${id}`); 
+    const View = async (id) => await axios.post(`${import.meta.env.VITE_API_URL}/pr/view/${id}`); 
 
 
   return (

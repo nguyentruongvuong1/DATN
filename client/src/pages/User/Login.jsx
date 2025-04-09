@@ -29,7 +29,7 @@ export default function FormLogin(){
             SetPasswordErr("Vui lòng nhập email")
         }
         else{
-            let url = `http://localhost:3000/dangnhap`;
+            let url = `${import.meta.env.VITE_API_URL}/dangnhap`;
             let tt = {email, password};
             let opt = {
                 method: 'POST', body: JSON.stringify(tt), headers: {'Content-Type': 'application/json'}

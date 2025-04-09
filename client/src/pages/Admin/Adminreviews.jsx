@@ -26,7 +26,7 @@ const AdminReviews = () => {
 
     const fetchReviews  = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/admin/reviews?page=${currentPage}&limit=${itemsPerPage}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/reviews?page=${currentPage}&limit=${itemsPerPage}`);
             setReviews(response.data.comments || response.data);
             setTotalReviews(response.data.total || response.data.length);
             console.log(response.data);

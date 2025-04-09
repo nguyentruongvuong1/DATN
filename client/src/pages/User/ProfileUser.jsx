@@ -11,17 +11,17 @@ export default function Profileuser() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/user/user/${user?.id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/user/user/${user?.id}`)
       .then((res) => res.json())
       .then((result) => setprofile(result));
-    fetch(`http://localhost:3000/user/order_user/${user?.id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/user/order_user/${user?.id}`)
       .then((res) => res.json())
       .then((result) => setorder(result));
   }, [user?.id]);
 
  const fetchOrderDetail = async (order_id) => {
     try {
-        const res = await fetch(`http://localhost:3000/user/orderdetail_user/${order_id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/user/orderdetail_user/${order_id}`);
         
         if (!res.ok) {
             throw new Error(`Lỗi server: ${res.status}`);

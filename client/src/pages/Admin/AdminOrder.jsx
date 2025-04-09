@@ -36,7 +36,7 @@ export default function AdminOrder() {
   const fecth_Ordetail = async (order_id) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/admin/order_detail/${order_id}`
+        `${import.meta.env.VITE_API_URL}/admin/order_detail/${order_id}`
       );
       const data = await res.json(); // Thêm await
       setorder_detail(Array.isArray(data) ? data : []); // Đảm bảo luôn là mảng
@@ -51,7 +51,7 @@ export default function AdminOrder() {
   const fetchOrder = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/admin/order?page=${currentPage}&limit=${itemsPerPage}`
+        `${import.meta.env.VITE_API_URL}/admin/order?page=${currentPage}&limit=${itemsPerPage}`
       );
       setOrder(response.data.order || response.data);
       setTotalOrder(response.data.total || response.data.length);
@@ -68,7 +68,7 @@ export default function AdminOrder() {
   const handleStatusChange = async (orderId, currentStatus, newStatus) => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/admin/order_status/${orderId}`,
+        `${import.meta.env.VITE_API_URL}/admin/order_status/${orderId}`,
         { order_status: newStatus }
       );
   

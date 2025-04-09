@@ -16,7 +16,7 @@ const FormThemSanPham = () => {
     files.forEach(file => formDataUpload.append('images', file));
   
     try {
-      const res = await axios.post('http://localhost:3000/adminpr/upload', formDataUpload, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/adminpr/upload`, formDataUpload, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
   
@@ -63,7 +63,7 @@ const FormThemSanPham = () => {
 
   // Lấy danh sách cate
   useEffect(() => {
-    axios.get('http://localhost:3000/adminc/cate').then((res) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/adminc/cate`).then((res) => {
       setCates(res.data);
       console.log(res.data);
     });
@@ -72,7 +72,7 @@ const FormThemSanPham = () => {
   // Khi chọn cate, lấy characteristic 
   useEffect(() => {
     if (formData.cate_id) {
-      axios.get(`http://localhost:3000/adminc/characteristic/${formData.cate_id}`)
+      axios.get(`${import.meta.env.VITE_API_URL}/adminc/characteristic/${formData.cate_id}`)
         .then(res => setCharacteristic(res.data))
         .catch(err => console.error(err));
     }
@@ -81,7 +81,7 @@ const FormThemSanPham = () => {
   // Lấy type_cate theo characteristic được chọn
 useEffect(() => {
     if (formData.characteristic_id) {
-      axios.get(`http://localhost:3000/adminc/type_cates/${formData.characteristic_id}`)
+      axios.get(`${import.meta.env.VITE_API_URL}/adminc/type_cates/${formData.characteristic_id}`)
         .then(res => setTypeCates(res.data))
         .catch(err => console.error(err));
     } else {
@@ -112,7 +112,7 @@ useEffect(() => {
       type_cate_ids: selectedTypeCates
     };
 
-    axios.post('http://localhost:3000/adminpr/products', payload)
+    axios.post(`${import.meta.env.VITE_API_URL}/adminpr/products`, payload)
       .then(() => {
         alert('Tạo sản phẩm thành công!');
         // Reset form

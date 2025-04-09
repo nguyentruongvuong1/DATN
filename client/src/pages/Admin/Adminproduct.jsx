@@ -17,7 +17,7 @@ const AdminProduct = () => {
         const fetchData = async () => {
             try {
                 const products = await fetch(
-                    `http://localhost:3000/adminpr/products?page=${currentPage}&limit=${itemsPerPage}`
+                    `${import.meta.env.VITE_API_URL}/adminpr/products?page=${currentPage}&limit=${itemsPerPage}`
                 );
                 const response = await products.json();
                 setProducts(response.products || response);
@@ -38,7 +38,7 @@ const AdminProduct = () => {
         if (!window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) return;
             { 
             try{
-                   await axios.delete(`http://localhost:3000/adminpr/product/${id}`);
+                   await axios.delete(`${import.meta.env.VITE_API_URL}/adminpr/product/${id}`);
                    alert("Xóa sản phẩm thành công!");
                      setProducts(products.filter(product => product.id !== id));
             }catch (error) {

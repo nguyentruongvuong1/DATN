@@ -24,7 +24,7 @@ const Admincharacteristic = () => {
     // Hàm lấy danh sách characteristic từ API
     const fetchcharacteristics = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/adminc/characteristic");
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/adminc/characteristic`);
             setcharacteristics(response.data);
         } catch (error) {
             console.error("Lỗi khi lấy dữ liệu:", error);
@@ -36,7 +36,7 @@ const Admincharacteristic = () => {
         if (!window.confirm("Bạn có chắc muốn xóa characteristic này không?")) return;
 
         try {
-            const response = await axios.delete(`http://localhost:3000/adminc/characteristic/${id}`);
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/adminc/characteristic/${id}`);
             console.log("Response:", response.data);
 
             if (response.status === 200) {
@@ -60,7 +60,7 @@ const Admincharacteristic = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:3000/adminc/characteristic", newcharacteristic);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/adminc/characteristic`, newcharacteristic);
             console.log("Response:", response.data);
 
             if (response.status === 200) {
@@ -78,7 +78,7 @@ const Admincharacteristic = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/adminc/cate");
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/adminc/cate`);
             setCategories(response.data);
         } catch (error) {
             console.error("Lỗi khi lấy danh mục:", error);
@@ -106,7 +106,7 @@ const Admincharacteristic = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(`http://localhost:3000/adminc/characteristic/${editcharacteristic.id}`, editcharacteristic);
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/adminc/characteristic/${editcharacteristic.id}`, editcharacteristic);
             console.log("Response:", response.data);
 
             if (response.status === 200) {

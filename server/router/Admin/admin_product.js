@@ -1,12 +1,15 @@
+require('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var pool = require('../../database/db'); // Đảm bảo đã sử dụng mysql2/promise
 var upload = require('../../multerConfig');
 const path = require('path');
 const fs = require('fs');
+const baseUrl = process.env.BASE_URL; // Lấy từ .env
+
 // up nhiều sản phẩm
 router.post('/upload', upload.array('images', 10), (req, res) => {
-    const urls = req.files.map(file => `http://localhost:3000/public/images/${file.filename}`);
+    const urls = req.files.map(file => `${baseUrl}/public/images/${file.filename}`);
     res.json({ urls });
   });
 

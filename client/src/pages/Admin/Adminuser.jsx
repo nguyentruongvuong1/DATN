@@ -16,7 +16,7 @@ const AdminUser = () => {
     const fetchUsers = async () => {
         try {
             const { data } = await axios.get(
-                `http://localhost:3000/admin/users?page=${currentPage}&limit=${itemsPerPage}`
+                `${import.meta.env.VITE_API_URL}/admin/users?page=${currentPage}&limit=${itemsPerPage}`
             );
             setUsers(data.users || []);
             setTotalUsers(data.total || 0);
@@ -35,7 +35,7 @@ const AdminUser = () => {
     
     const handleStatusChange = async (userId, newStatus) => {
         try {
-            await axios.put(`http://localhost:3000/admin/user/${userId}`, { status: newStatus });
+            await axios.put(`${import.meta.env.VITE_API_URL}/admin/user/${userId}`, { status: newStatus });
             // Cập nhật lại danh sách người dùng
             fetchUsers();
         } catch (error) {

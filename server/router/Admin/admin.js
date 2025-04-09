@@ -4,6 +4,8 @@ var pool = require('../../database/db'); // Đảm bảo đã sử dụng mysql2
 var upload = require('../../multerConfig');
 const path = require('path');
 const fs = require('fs');
+require('dotenv').config(); // Đảm bảo dotenv đã được cài đặt và cấu hình
+const baseUrl = process.env.BASE_URL; // Lấy từ .env
 
 // Import multer config
 
@@ -183,7 +185,7 @@ router.get("/banners", async (req, res) => {
 router.post('/banner', upload.single('image'), async (req, res) => {
 
   const { status } = req.body;
-  const image = req.file ? `http://localhost:3000/public/images/${req.file.filename}` : null;
+  const image = req.file ? `${baseUrl}/public/images/${req.file.filename}` : null;
 
   if (!image) {
     return res.status(400).json({ message: "Ảnh là bắt buộc!" });

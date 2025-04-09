@@ -43,7 +43,7 @@ export default function VerifyOTP() {
   // Kiểm tra trạng thái OTP
   const checkOTPStatus = async () => {
     try {
-      const response = await fetch("http://localhost:3000/xacminhotp/check-status", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/xacminhotp/check-status`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -82,7 +82,7 @@ export default function VerifyOTP() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/xacminhotp", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/xacminhotp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -112,7 +112,7 @@ export default function VerifyOTP() {
   // Gửi lại OTP
   const handleResendOTP = async () => {
     try {
-      const response = await fetch("http://localhost:3000/dangky/resend-otp", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/dangky/resend-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
