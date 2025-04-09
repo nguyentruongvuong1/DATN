@@ -26,14 +26,14 @@ export default function Prdanhchoban() {
     const fetchData = async () => {
       try {
         // Lấy danh sách sản phẩm hot
-        const resHot = await fetch("http://localhost:3000/pr/prhot");
+        const resHot = await fetch(`${import.meta.env.VITE_API_URL}/pr/prhot`);
         const hotData = await resHot.json();
         setPrHot(hotData);
 
         // Nếu có user, lấy danh sách sản phẩm yêu thích của user
         if (user && user.id) {
           const resFav = await fetch(
-            `http://localhost:3000/pr/user-favorite/${user.id}`
+            `${import.meta.env.VITE_API_URL}/pr/user-favorite/${user.id}`
           );
           const likedProductIds = await resFav.json();
 
@@ -59,7 +59,7 @@ export default function Prdanhchoban() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/pr/toggle-favorite", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/pr/toggle-favorite`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id, pr_id }),
@@ -84,7 +84,7 @@ export default function Prdanhchoban() {
 
   // Tăng lượt xem của sản phẩm
   const View = async (id) =>
-    await axios.post(`http://localhost:3000/pr/view/${id}`);
+    await axios.post(`${import.meta.env.VITE_API_URL}/pr/view/${id}`);
 
   return (
     <main className={styles.bgmain}>

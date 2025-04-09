@@ -26,14 +26,14 @@ export default function PrCate() {
     const fetchData = async () => {
       try {
         // Lấy tất cả danh mục và sản phẩm
-        const res = await fetch("http://localhost:3000/pr/categories-with-products");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/pr/categories-with-products`);
         const data = await res.json();
         setCategories(data);
 
         // Nếu có user, lấy danh sách sản phẩm yêu thích
         if (user && user.id) {
           const resFav = await fetch(
-            `http://localhost:3000/pr/user-favorite/${user.id}`
+            `${import.meta.env.VITE_API_URL}/pr/user-favorite/${user.id}`
           );
           const likedProductIds = await resFav.json();
 
@@ -61,7 +61,7 @@ export default function PrCate() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/pr/toggle-favorite", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/pr/toggle-favorite`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: user.id, pr_id }),
@@ -85,7 +85,7 @@ export default function PrCate() {
   };
 
   // Tăng lượt xem của sản phẩm (giữ nguyên)
-  const View = async (id) => await axios.post(`http://localhost:3000/pr/view/${id}`);
+  const View = async (id) => await axios.post(`${import.meta.env.VITE_API_URL}/pr/view/${id}`);
 
   return (
     <main className={styles.bgmain}>

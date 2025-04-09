@@ -52,7 +52,7 @@ const Header = () => {
   // }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/pr/pr`)
+    fetch(`${import.meta.env.VITE_API_URL}/pr/pr`)
       .then((res) => res.json())
       .then((data) => setproduct(data));
   }, []);
@@ -82,14 +82,14 @@ const Header = () => {
 
   // Fetch danh mục
   useEffect(() => {
-    fetch("http://localhost:3000/c/cate")
+    fetch(`${import.meta.env.VITE_API_URL}/c/cate`)
       .then((res) => res.json())
       .then((data) => setCate(data));
   }, []);
 
   // Fetch đặc điểm theo danh mục
   const fetchCharacteristics = (cate_id) => {
-    fetch(`http://localhost:3000/c/characteristics/${cate_id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/c/characteristics/${cate_id}`)
       .then((res) => res.json())
       .then((data) => setCharacteristics(data));
   };

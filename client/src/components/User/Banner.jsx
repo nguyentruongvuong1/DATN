@@ -8,9 +8,9 @@ export default function Banner() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("http://localhost:3000/banner/");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}:3000/banner/`);
         const data = await response.json();
-        setimages(data.map((item) => item.image && item.image.startsWith('../../public/images') ? `http://localhost:3000/${item.image}` : item.image)); // Lấy URL ảnh từ API
+        setimages(data.map((item) => item.image && item.image.startsWith('../../public/images') ? `${import.meta.env.VITE_API_URL}/${item.image}` : item.image)); // Lấy URL ảnh từ API
       } catch (error) {
         console.error("Lỗi khi tải ảnh:", error);
       }

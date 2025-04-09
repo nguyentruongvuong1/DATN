@@ -10,7 +10,7 @@ export default function Search() {
   const [isInputFocused, setInputFocused] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/pr/pr`)
+    fetch(`${import.meta.env.VITE_API_URL}/pr/pr`)
       .then((res) => res.json())
       .then((data) => setproduct(data));
   }, []);

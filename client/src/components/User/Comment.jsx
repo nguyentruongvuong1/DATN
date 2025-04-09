@@ -25,8 +25,8 @@ export default function ProductReview() {
       try {
         // Kiểm tra đồng thời cả quyền mua hàng và đã đánh giá chưa
         const [purchaseRes, reviewRes] = await Promise.all([
-          fetch(`http://localhost:3000/reviews/check-purchase?userId=${user.id}&productId=${productId}`),
-          fetch(`http://localhost:3000/reviews/check-reviewed?userId=${user.id}&productId=${productId}`)
+          fetch(`${import.meta.env.VITE_API_URL}/reviews/check-purchase?userId=${user.id}&productId=${productId}`),
+          fetch(`${import.meta.env.VITE_API_URL}/reviews/check-reviewed?userId=${user.id}&productId=${productId}`)
         ]);
 
         const purchaseData = await purchaseRes.json();
@@ -52,7 +52,7 @@ export default function ProductReview() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/reviews/submit-review", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/reviews/submit-review`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
