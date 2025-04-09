@@ -1,0 +1,60 @@
+
+
+.bgmain{
+    background-color: #FCF9F3;
+    min-height: auto;
+   }
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bgwhite{
+    background-color: white;
+}
+
+.lydochon {
+    display: flex;
+    align-items: center; 
+    padding: 20px 0;
+}
+
+
+.lydochon h1{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #00791C;
+}
+
+.lydochon_anh img{
+    width: 500px;
+    height: 500px;
+    margin-right: 60px;
+}
+
+
+.lydochon_item{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.lydochon_item_con {
+    width: 200px;
+    display: flex;
+
+}
+
+.lydochon_item_con img{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.lydochon_item_con p{
+    margin: 0;
+    line-height: 24px;
+}

@@ -1,0 +1,882 @@
+/*TikTok: Coding World*/
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --blue: #269952;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.navigation {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--blue);
+    border-left: 10px solid var(--blue);
+    transition: 0.5s;
+    overflow: visible;
+    z-index: 10000;
+}
+
+.navigation.active {
+    width: 80px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    transition: background 0.3s;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+    background: var(--white);
+    background-color: #ffffff;
+    /* Màu xanh highlight */
+    color: white;
+}
+
+.navigation ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.navigation ul li a .logo {
+    margin-top: 20px;
+}
+
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+    color: var(--blue);
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+
+.navigation ul li a .icon ion-icon {
+    font-size: 1.75em;
+}
+
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+    /* content: ''; */
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+    /* content: ''; */
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+/* menucon---------------------------------------------------------- */
+
+/* Cố định submenu nằm bên trong menu cha */
+.navigation .has-submenu {
+    position: relative;
+}
+
+/* Ẩn menu con mặc định */
+.navigation .submenu {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 5px);
+    background: #136834;
+    color: white;
+    min-width: 220px;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    /* Ẩn */
+    visibility: hidden;
+    /* Không hiển thị */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    /* Đảm bảo hiển thị trên cùng */
+}
+
+/* Hiển thị menu con khi hover vào mục cha */
+.navigation .has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Định dạng các mục trong menu con */
+.navigation .submenu div {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* Viền nhẹ */
+}
+
+/* Loại bỏ viền cuối cùng */
+.navigation .submenu div:last-child {
+    border-bottom: none;
+}
+
+/* Định dạng liên kết */
+.navigation .submenu div a {
+    text-decoration: none;
+    display: block;
+    color: #ffffff;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Hiệu ứng hover */
+.navigation .submenu div:hover {
+    background: #0e4f27;
+}
+
+.navigation .submenu div:hover a {
+    color: #ffffff;
+}
+
+/* menucon---------------------------------------------------------- */
+.main {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.5s;
+}
+
+.main.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.topbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+    cursor: pointer;
+}
+
+.search {
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+
+.search label {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 40px;
+    /* Chừa khoảng trống cho icon */
+    font-size: 18px;
+    outline: none;
+    border: 1px solid var(--black2);
+}
+
+.search svg {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: var(--black2);
+}
+
+
+.user {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.user img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardBox {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.cardBox .card {
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.cardBox .card .numbers {
+    position: relative;
+    font-weight: 500;
+    font-size: 1.2em;
+    color: var(--blue);
+}
+
+.cardBox .card .cardName {
+    color: var(--black2);
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+.cardBox .card .iconBx {
+    font-size: 3.5em;
+    color: var(--black2);
+}
+
+.cardBox .card:hover {
+    background: var(--blue);
+}
+
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx {
+    color: var(--white);
+}
+
+/* charts */
+.graphBox {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 30px;
+    min-height: 200px;
+}
+
+.graphBox .box {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.graphBox .box canvas {
+    width: 100% !important;
+}
+
+
+.details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-gap: 30px;
+}
+
+.details .recentOrders {
+    position: relative;
+    display: grid;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+
+}
+
+.cardHeader h2 {
+    font-weight: 600;
+    color: var(--blue);
+}
+
+.buttonAdd {
+    position: relative;
+    padding: 10px 10px;
+    background: var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.details table thead td {
+    font-weight: 600;
+}
+
+.details .recentOrders table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details .recentOrders table tr:last-child {
+    border-bottom: none;
+}
+
+/* .details .recentOrders table tbody tr:hover {
+    background: var(--blue);
+    color: var(--white);
+} */
+
+.details .recentOrders table tr td {
+    padding: 15px;
+    text-align: center;
+}
+
+.details .recentOrders table tr td:last-child {
+    text-align: end;
+}
+
+
+
+.details .recentOrders table tr td:nth-child(3) {
+    text-align: center;
+}
+
+.status.delivered {
+    padding: 2px 4px;
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status.pending {
+    padding: 2px 4px;
+    background: #f9ca3f;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status.return {
+    padding: 2px 4px;
+    background: #f00;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status.inprogress {
+    padding: 2px 4px;
+    background: #1795ce;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.recentCustomers {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.recentCustomers .imgBx {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.recentCustomers .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recentCustomers table tr td {
+    padding: 12px 10px;
+}
+
+.recentCustomers table tr td h4 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2em;
+}
+
+.recentCustomers table tr td h4 span {
+    font-size: 14px;
+    color: var(--black2);
+}
+
+.recentCustomers table tr:hover {
+    background: var(--blue);
+    color: var(--white);
+}
+
+.recentCustomers table tr:hover td h4 span {
+    color: var(--white);
+}
+
+
+
+
+.details table {
+    margin-top: 0%;
+}
+
+.details table td{
+    text-align: center !important;
+}
+
+.details table td button {
+    padding: 8px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.details table td .btn-edit {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.details table td .btn-delete {
+    background-color: #f44336 !important;
+    /* Màu đỏ */
+    color: white !important;
+}
+
+.details table td .btn-navigate {
+    background-color: #FFC107 !important;
+    /* Màu vàng */
+    color: black !important;
+}
+
+.details table td .btn-backpage {
+    background-color: #123fd1 !important;
+    /* Màu sky */
+    color: white !important;
+}
+
+.details table td button:first-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.details table td button:last-child {
+    background-color: #f44336;
+    color: white;
+}
+
+
+/* css form sửa, thêm---------------------------------------------------------------------*/
+/*   Overlay nền mờ dùng chung */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    /* Cho phép cuộn nếu modal quá dài */
+    padding: 20px;
+}
+
+/*   Khung chính của modal (dùng cho cả Form Sửa & Thêm) */
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    /* Giới hạn chiều cao để tránh tràn màn hình */
+    overflow-y: auto;
+    /* Bật cuộn khi nội dung dài */
+}
+
+/*   Tiêu đề */
+.modal-container h3 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/*   Nút đóng */
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    color: red;
+}
+
+/*   Nhãn chung */
+.modal-container label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/*   Ô nhập và dropdown */
+.modal-container input,
+.modal-container select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/*   Nút */
+.modal-container button {
+    width: 100%;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal-container button:hover {
+    background: darkblue;
+}
+
+/* Nút hủy */
+.modal-container .cancel-btn {
+    background: gray;
+    margin-top: 10px;
+}
+
+.modal-container .cancel-btn:hover {
+    background: darkgray;
+}
+
+.btn-show {
+    background-color: red !important;
+    color: white !important;
+}
+
+.btn-hide {
+    background-color: green !important;
+    color: white !important;
+}
+.xemdanhgia {
+    background: #f9ca3f !important;
+    color: var(--white);
+ 
+}
+
+.xemdanhgia a{
+    text-decoration: none;
+
+}
+
+/*   css phân trang--------------------------- */
+/* Paginate */
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+}
+
+/* Danh sách pagination */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Các nút trang và điều hướng */
+.pageItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pageLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+/* Nút Previous và Next */
+.previousLink,
+.nextLink {
+    padding: 0 8px;
+    width: auto;
+}
+
+/* Trang hiện tại */
+.active .pageLink {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+/* Hiệu ứng hover */
+.pageLink:hover:not(.active .pageLink) {
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+}
+
+/* Dấu ba chấm (ellipsis) */
+.break {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #333;
+}
+
+/* CheckBox---------------------- */
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* Chia thành 4 cột */
+    gap: 15px;
+    /* Khoảng cách giữa các ô */
+    padding: 10px;
+    max-width: 100%;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.small-checkbox {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+
+
+.status-select.active {
+    background-color: #3fe86f;
+    color: #000000;
+  }
+  
+  .status-select.locked {
+    background-color: #ca606a;
+    color: #000000;
+  }
+  .status-select {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+
+  /* Bảng đơn hàng */
+  /* CSS cho dropdown trạng thái đơn hàng */
+.comment-table select {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .comment-table select:hover {
+    border-color: #aaa;
+  }
+  
+  .comment-table select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  }
+  
+  /* Style cho các option */
+  .comment-table option {
+    padding: 8px 12px;
+  }
+  
+  /* Style cho option bị disabled */
+  .comment-table option:disabled {
+    color: #999;
+    background-color: #f5f5f5;
+  }
+  
+  /* Style tùy chỉnh theo trạng thái */
+  .comment-table option[value="1"] { /* Chờ xác nhận */
+    color: #ff9800;
+  }
+  
+  .comment-table option[value="2"] { /* Xác nhận */
+    color: #2196f3;
+  }
+  
+  .comment-table option[value="3"] { /* Đang giao */
+    color: #673ab7;
+  }
+  
+  .comment-table option[value="4"] { /* Hoàn thành */
+    color: #4caf50;
+  }
+
+
+
+
+/* CSS cho bảng chi tiết đơn hàng */
+
+  

@@ -1,0 +1,117 @@
+
+
+.bgimg{
+    height: 650px;
+    width: 100%;
+    background-size: cover;   
+    background-position: center; 
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.banner{
+    max-width: 1200px;
+    margin: 0 auto;
+  
+}
+
+.banner_content{
+    width: 575px;
+    height: 310px;
+    background-color: #ffffff86;
+    padding: 20px 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.slide{
+    position: relative;
+  width: 100%;
+  height: 650px;
+ }
+
+.slide img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.slide::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); 
+  }
+
+
+
+.banner_content h1{
+    font-size: 32px;
+    color: #224229;
+}
+
+.banner_content p{
+    font-size: 24px;
+    color: #224229;
+    line-height: 40px;
+    margin: 10px 0;
+}
+
+
+
+.banner_btn {  
+display: flex;
+gap: 10px;
+justify-content: center;
+}
+
+.btn_lienhe, .btn_khampha{
+    width: 183px;
+    border: 3px solid #224229;
+    text-align: center;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn_lienhe a{
+    text-decoration: none;
+    font-size: 20px;
+    color: #224229;
+    font-weight: bold;
+    height: 45px;
+    line-height: 45px;
+}
+
+.btn_khampha{
+    background-color: #15351c;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.btn_khampha a{
+    color: white;
+    text-decoration: none;
+    height: 45px;
+    line-height: 45px;
+
+}
+
+.btn_lienhe:hover {
+    background-color: #15351c;
+}
+
+.btn_lienhe:hover a{
+    color: white;
+}
+
+.btn_khampha:hover {
+    background-color: #06280d;
+}
+
+.btn_khampha:hover a{
+    color: white;
+}

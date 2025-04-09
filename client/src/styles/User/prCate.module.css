@@ -1,0 +1,284 @@
+
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bgmain{
+    background-color: #FCF9F3;
+  
+   }
+.container_title{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+   .title_name{
+    position: relative; 
+   width: 1200px;
+   padding-top: 20px;
+}
+.title_name p {
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #00791C;
+    background-color: #00791C;
+    color: white;
+    display: inline-block; 
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    margin: 0;
+
+}
+
+.title_name::after {
+    content: '';
+    display: inline-block; 
+    width: 100%; 
+    height: 3px;
+    background-color: #00791C;
+    position: absolute;
+    left: 0%;
+    transform: translateY(-50%); 
+    bottom: 0%;
+    margin-bottom: -4px;
+}
+ 
+
+.products{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
+    gap: 20px;
+    justify-content: center; 
+    margin: 20px 0;
+    width: 50%;
+}
+.productsTitle {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    grid-column: 1 / -1; /* Giúp tiêu đề chiếm toàn bộ dòng nếu đang dùng grid */
+  }
+
+ 
+
+.product{
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    background-color: white;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out; 
+
+}
+
+.product:hover{
+    transform: scale(1.05);
+}
+
+
+.product_img{
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-radius: 5px 5px 0 0;
+}
+
+.product_img img{
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease-in-out;
+
+}
+
+.product_img img:hover{
+    transform: scale(1.3);
+}
+
+
+
+.product_info{
+    padding: 0 15px;
+}
+
+.product_info p{
+    font-size: 16px;
+}
+.product_info>p{
+    margin: 0;
+    padding: 5px 0;
+
+}
+
+.product_info>p:last-child{
+    margin-bottom: 5px;
+}
+
+
+.product_price{
+    color: #00791C;
+}
+
+
+.product_btn{
+    position: absolute;
+    top: 35%;
+    left: 50%;  
+    transform: translate(-50%, -35%);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product_btn p{
+    margin: 0px;
+
+}
+
+.pr_xemchitiet button{
+color: white;
+height: 50px;
+width: 150px;
+border-radius: 50px;
+opacity: 0;
+font-size: 16px;
+font-weight: bolder;
+background-color: #224229;
+border-style: none;
+margin-bottom: 5px;
+cursor: pointer;
+}
+
+.pr_themvaogio button{
+    color: white;
+    height: 50px;
+    width: 150px;
+    border-radius: 50px;
+    background-color: #D97904;
+border-style: none;
+    opacity: 0;
+    font-size: 16px;
+font-weight: bolder;
+cursor: pointer;
+    }
+
+.product:hover .pr_xemchitiet button, .product:hover .pr_themvaogio button{
+    opacity: 1;
+}
+
+.pr_xemchitiet button:hover{
+    background-color: #00791C;
+   
+
+}
+
+.pr_themvaogio button:hover{
+    color: white;
+    background-color: #f29320;
+    
+}
+
+
+.pr_tim{
+right: 8px;
+font-size: 25px;
+-webkit-text-stroke: 1px #224229;
+position: absolute;
+top: 4px;
+
+}
+
+.pr_tim i {
+    -webkit-text-stroke: 1.5px #3498db;
+  }
+
+.pr_view{
+    position: absolute;
+    margin-top: -22px;
+    margin-left: 5px;
+    font-size: 12px;
+   
+
+}
+
+.pr_view p{
+    display: inline;
+    font-size: 12px;
+}
+
+.pr_thongbao{
+    position: absolute;
+    top: 0px;
+    width: 50px;
+    background-color: #53BD51;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px 0 0 0;
+}
+
+.pr_thongbao p{
+    margin: 0px;
+}
+
+.btnxct{
+    text-decoration: none;
+    color: white;
+
+}
+
+.btn_xemthem{
+
+    display: flex;
+    justify-content: center;    
+
+    grid-column: 1 / -1; /* Giúp tiêu đề chiếm toàn bộ dòng nếu đang dùng grid */
+    
+}
+
+.btn_xemthem1{
+    border: 2px solid #224229;
+    border-radius: 50px;
+    padding: 10px;
+    width: 150px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.btn_xemthem_link{
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bolder;
+    cursor: pointer;
+    text-decoration: none;
+    color: #224229;
+    transition: all 0.3s ease-in-out;
+
+    
+}
+
+.btn_xemthem1:hover{
+    background-color: #00791C;
+    color: white;
+        border: 2px solid #00791C;
+
+}
+
+.btn_xemthem1:hover .btn_xemthem_link{
+    margin-right: 5px;
+    color: white;
+
+}
+
+
