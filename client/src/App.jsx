@@ -28,13 +28,14 @@ import AdminUser from "./pages/Admin/Adminuser";
 import AdminOrder from "./pages/Admin/AdminOrder";
 import FormThemSanPham from "./components/Admin/AdminAddPr";
 
+import ProtectAdmin from "./ProtectAdmin";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Route dành cho User */}
-        <Route path="/" element={<> <UserInfo /> <UserLayout /> </>}>
+        <Route path="/" element={<> <UserInfo /><UserLayout /> </>}>
           <Route index element={<Home />} />
           <Route path="/dangnhap" element={<Login />} />
           <Route path="/dangky" element={<Register />} />
@@ -51,7 +52,7 @@ function App() {
         </Route>
 
         {/* Route dành cho Admin */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={<>  <UserInfo /> <ProtectAdmin>  <AdminLayout /> </ProtectAdmin>  </> }>
           <Route index element={<AdminDashboard />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="voucher" element={<AdminVoucher />} />
