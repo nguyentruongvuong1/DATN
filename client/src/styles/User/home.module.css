@@ -58,3 +58,36 @@
     margin: 0;
     line-height: 24px;
 }
+
+
+
+@media screen and (max-width: 480px) {
+    .lydochon{
+        width:50%;
+    }
+    .lydochon img{
+      display: none;
+    }
+    .lydochon_item{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding:15px;
+        
+    }
+    /* .lydochon_item img{
+        width:30px;
+        height:30px;
+} */
+    .lydochon_item_con h3{
+        font-size:12px;
+    }
+    .lydochon_item_con p{
+        font-size:12px;
+        width:70%;
+}
+    .lydochon h1{
+        font-size:25px;
+        
+        width:390px;
+    }
+}

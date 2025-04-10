@@ -234,7 +234,7 @@ export default function Cart() {
       </div>
       <div className={styles.cart_content}>
           <h3>
-            Bạn chưa có sản phẩm trong giỏ hàng.{" "}
+            Bạn chưa có sản phẩm trong giỏ hàng. {" "}
             <Link to={"/"}>Nhấn để mua sản phẩm ngay.</Link>
           </h3>
         </div>

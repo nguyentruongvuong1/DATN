@@ -115,3 +115,41 @@ justify-content: center;
 .btn_khampha:hover a{
     color: white;
 }
+
+
+
+@media screen and (max-width: 480px) {
+    .banner_content{
+        height:300px;
+        width:500px;
+    }
+    .banner_content h1{
+        font-size:20px;
+       
+}
+    .banner_content p{
+        font-size:18px;
+        width:350px;
+    }
+    .bgimg{
+        height:400px;
+    }
+    .btn_lienhe
+    {
+        width:20%;
+    } 
+   .btn_khampha{
+        width:30%;
+    }
+    .btn_lienhe a{
+        font-size:14px;
+    }
+    .btn_khampha a{
+        font-size:14px;
+    
+    } 
+    .slide{
+        height:400px;
+    }
+    
+}

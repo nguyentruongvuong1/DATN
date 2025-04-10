@@ -91,3 +91,34 @@
  color: white;
  text-align: center;
 }
+@media screen and (max-width: 480px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer_logo, .footer_vct, .footer_bando {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .footer_vct a {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .footer_vct p {
+        font-size: 20px;
+    }
+
+    .footer_vct p::before {
+        width: 100%;
+        display: block;
+    }
+
+    .footer_logo p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

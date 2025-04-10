@@ -68,3 +68,11 @@
 .cate p:hover {
     background-color: #15351c;
 }
+
+
+
+@media screen and (max-width: 480px) {
+    .fullcate{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+}}

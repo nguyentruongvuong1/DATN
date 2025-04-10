@@ -282,3 +282,114 @@ top: 4px;
 }
 
 
+
+
+
+@media screen and (max-width: 480px) {
+    .products {
+    display:block;
+        
+      padding: 20px
+      
+    }
+    .productsTitle{
+        margin-bottom:10px;
+        font-size:18px;
+    }
+
+    .product {
+      max-width: 100%;
+      height: 300px;
+      margin-bottom:10px;
+    }
+  
+    
+  
+    .product_btn {
+        flex-direction: column;
+        top: 30%;
+        transform: translate(-50%, -30%);
+  
+        width: 90%;
+  
+        justify-content: center;
+        align-items: center;
+        
+      }
+      .btnxct {
+          font-size: 12px;
+          line-height:16px;
+         
+      }
+      .pr_xemchitiet button,
+      .pr_themvaogio button {
+        width:80px;
+      height:30px;
+        font-size: 12px;
+        border-radius: 40px;
+      }
+     .pr_themvaogio button{
+      font-size:12px;
+      line-height:16px;
+     }
+      .product_info p {
+        font-size: 13px;
+      }
+  
+    .product_price {
+      font-size: 14px;
+    }
+  
+    .title_name {
+      width: 100%;
+      padding: 10px 0;
+    }
+  
+    .title_name p {
+      font-size: 16px;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 8px;
+    }
+  
+  
+        .title_name::after{
+            bottom:10px;
+        }
+
+  
+    .pr_tim {
+      font-size: 20px;
+      top: 6px;
+      right: 6px;
+    }
+  
+    .pr_thongbao {
+      width: 40px;
+      height: 25px;
+      font-size: 12px;
+      line-height: 25px;
+    }
+  
+
+    .btn_xemthem1{
+        height:30px;
+        width:120px;
+    }
+    .btn_xemthem_link{
+        position: relative;
+        bottom:32px;
+        font-size:12px;
+    }
+    .btn_xemthem svg{
+        
+        position: relative;
+        bottom:32px;
+        font-size:12px;
+    }
+    .product_img img{
+        height:170px
+    }
+    
+  }
+  

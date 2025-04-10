@@ -104,3 +104,47 @@ p {
         align-items: center;
     }
 }
+
+
+
+@media (max-width: 480px) {
+  .not-found-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .info h1 {
+    font-size: 4rem;
+  }
+
+  .info h2 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn-home, .btn-shop {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  .leaf-decoration {
+    font-size: 2.5rem;
+    top: -10px;
+    right: 10px;
+  }
+
+  .plant-image {
+    max-width: 100%;
+    height: auto;
+  }
+}

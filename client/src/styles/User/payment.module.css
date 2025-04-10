@@ -86,10 +86,33 @@
 
 
 .payment label {
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 10px 0;
-}
-
+    cursor: pointer;
+  }
+  
+  .payment input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #666;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  .payment input[type="radio"]:checked::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 8px;
+    height: 8px;
+    background-color: #666;
+    border-radius: 50%;
+  }
+  
 .payment .note {
     font-size: 12px;
     color: gray;
@@ -139,3 +162,65 @@
     color: green;
 }
 
+@media (max-width: 480px) {
+    .checkout {
+        flex-direction: column;
+    }
+  
+    .info, .order-summary {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-top:10px;
+    }
+
+    .info h3 {
+        font-size: 18px;
+    }
+
+    .checkout-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+     .order-summary p {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-summary p span {
+        margin-top: 5px;
+        font-weight: bold;
+    } 
+
+.item-info img{
+    width: 80px;
+    height: 80px;
+}
+
+.item-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-info p{
+    margin: 0;
+}
+
+.item-info-name{
+    width: 270px;
+}
+
+.grand-total span{
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
+}
+}

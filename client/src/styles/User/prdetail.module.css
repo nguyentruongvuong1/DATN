@@ -658,3 +658,205 @@ top: 4px;
     background-color: #D97904;
 
 }
+
+
+
+@media (max-width: 480px) {
+    .odau img{
+        width: 150px;
+        height:150px;
+    }
+        .odau .abc img{
+            width: 60px;
+            height: 60px;        
+            margin-left:4px;
+        }
+        .odau{
+            width:150px;
+        }
+        .abc{
+           gap:10px;
+        }
+        .cay b{
+            font-size:16px;
+        }
+        .masp{
+            font-size:16px;
+        }
+        .gia p{
+            font-size:16px;
+        }
+        .mota p{
+            font-size:16px;
+        }
+        .trangthai p{
+            font-size:16px;
+        }
+        .ocuoi{
+        width:200px;
+        }
+        .dongmota p{
+            display: none;
+        }
+        .rate, .trangthai, .mota, .dongmota, .loiich, .sku, .categories, .returnpolicytext{
+            font-size:16px;
+            line-height:18px;
+            }
+            .categories a{
+                line-height: 25px;
+              font-size:16px;
+            }
+            .returnpolicytext strong{
+                font-size:16px;
+            }
+            
+        
+       
+            .dgsp h3{
+                font-size:20px;
+            }
+            .danhgia h3{
+                font-size:20px;
+            }
+            .product-title{
+                font-size:20px;
+            }
+            .starss, .user, .date, .comment p, .yeucau{
+                font-size:14px;
+                line-height:25px;
+            }
+            .o1{
+                width:50%;
+            }
+            .dg{
+                height:110px;
+            }
+            textarea.commentbox{
+                height: 70px;
+            }
+            .container {
+            padding: 0px 10px;
+
+        }
+        .reviewContainer h3{
+            font-size:20px;
+
+        }  
+        .products{
+            grid-template-columns: 1fr 1fr;
+        }
+        .products img{
+            height:175.2px;
+        }
+        .product_img{
+            height:175.2px;
+        }
+        .reviewContainer{
+            margin-top:3px
+        }
+    
+.ochung{
+    padding:10px;
+}
+
+    .products {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 10px 5px;
+      
+    }
+  
+    .product {
+      max-width: 100%;
+    }
+  
+    .product_img img {
+      height: auto;
+    }
+  
+    .product_btn {
+        flex-direction: column;
+        top: 30%;
+        transform: translate(-50%, -30%);
+  
+        width: 90%;
+  
+        justify-content: center;
+        align-items: center;
+        
+      }
+      .btnxct {
+          font-size: 12px;
+          line-height:16px;
+         
+      }
+      .pr_xemchitiet button,
+      .pr_themvaogio button {
+        width:80px;
+      height:30px;
+        font-size: 12px;
+        border-radius: 40px;
+      }
+     .pr_themvaogio button{
+      font-size:12px;
+      line-height:16px;
+     }
+      .product_info p {
+        font-size: 13px;
+      }
+  
+    .product_price {
+      font-size: 14px;
+    }
+  
+    .title_name {
+      width: 100%;
+      padding: 10px 0;
+    }
+  
+    .title_name p {
+      font-size: 16px;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 8px;
+      text-align: left;
+      width:190px;
+    }
+  
+    .title_name::after {
+      display: none;
+    }
+  
+    .pr_tim {
+      font-size: 20px;
+      top: 6px;
+      right: 6px;
+    }
+  
+    .pr_thongbao {
+      width: 40px;
+      height: 25px;
+      font-size: 12px;
+      line-height: 25px;
+    }
+  
+   
+    .title_name p::after{
+       position: relative;
+        right:270px;
+        bottom:2px;
+
+    }
+    .btn-cart{
+        font-size:12px;
+        
+    }
+    .reviewNotice a{
+        color:black;
+        font-size:18px;
+        
+    }
+    .reviewNotice a:hover{
+        color:gray;
+    }
+}

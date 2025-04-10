@@ -17,7 +17,7 @@ import { fetchCountPrLike } from "../../AuthSlice";
 import { thoat } from "../../AuthSlice";
 import '@ant-design/v5-patch-for-react-19';
 import { message } from 'antd'; 
-
+import MobileMenu from "../MobileMenu";
 const Header = () => {
   const cart = useSelector((state) => state.cart.listPr);
   const user = useSelector((state) => state.auth.user);
@@ -145,7 +145,7 @@ const Header = () => {
                   </div>
             
                   <div className={styles.dropdownMenu}>
-                    <Link to={`/user/${user.id}`}>Thông tin người dùng</Link>
+                    <Link to={`/user/${user.id}`}>Thông tin</Link>
                     <Link to="/change-password">Đổi mật khẩu</Link>
                     <button className={styles.btn} onClick={() => { message.success('Bạn đã đăng xuất tài khoản thành công'); dispatch(thoat())}}>Đăng xuất</button>
                   </div>
@@ -166,6 +166,7 @@ const Header = () => {
         <div className={styles.container}>
           <div className={styles.tongheader}>
             <div className={styles.logo}>
+            <MobileMenu />
               <Link to={"/"}>
                 {" "}
                 <img src={"/images/logo.png"} alt="Logo" />{" "}

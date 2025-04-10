@@ -170,3 +170,84 @@
 .btn_xem:hover{
     background-color: #53BD51;
 }
+
+
+
+@media (max-width: 480px) {
+    .container_full,
+    .container {
+      width: 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+  
+    .user {
+      font-size: 20px;
+      height: 40px;
+      line-height: 40px;
+    }
+  
+    .user1 {
+      font-size: 18px;
+      padding: 10px;
+    }
+  
+    .history {
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+  
+    .text {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  
+    .texttt {
+      font-size: 14px;
+      text-align: center;
+    }
+  
+    .circle img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+  
+    .fix {
+      justify-content: center;
+      margin-top: 10px;
+    }
+  
+    .fix a {
+      height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+      padding: 0 15px;
+    }
+  
+    .modal-content {
+      width: 95%;
+      max-height: 90%;
+      padding: 15px;
+    }
+  
+    .close-btn {
+      padding: 4px 8px;
+      font-size: 14px;
+      top: 8px;
+      right: 10px;
+    }
+  
+    .table_order th,
+    .table_order td {
+      font-size: 10px;
+      padding: 6px;
+    }
+  
+    .btn_xem {
+      font-size: 10px;
+      padding: 6px 0;
+      width:40px;
+    }
+  }
+  

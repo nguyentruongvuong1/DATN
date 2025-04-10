@@ -508,5 +508,97 @@ font-size: 14px;
         background-color: #00791C;
       }
       
+      @media only screen and (max-width: 480px) {
+        
+          
+        .header-top_info_time p {
+          display: block;
+          font-weight: bold;
+          }
+          .header-top_info_phone p{
+              font-weight: bold;
+              
+          }
+        .header-top{
+          display: block;
+         
+        }
+        .header-top_info{
+          justify-content: center;
+          align-items: center;
+      
+        }
+        .bgxanh{
+         
+          height:85px;
+        }
+      
+      .header-top_icon{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        
+      }
+      .header-top_icon_tim p{
+      display: none;
+      } 
+      
+    
+      /* .header-top_icon{
+          display: none;
+      }
+   */
+
+  
+      .logo{
+          
+      }
+      .tendanhmuc_down{
+          display: none;
+      }
+      .search i{
+          display: none;
+      }
+
+      .tongheader{
+         justify-content: center;
+          align-items: center;
+          
+          padding-left:20px;
+      
+          
+      }
+a img{
+  margin-top:25px;
+}
+      .logo{
+          padding-right:0px;
+      }
+      .dropdownMenu a{
+
+          font-size:16px;
+          line-height:25px;
+          text-align: left;
+      }
+      .giohang{
+          margin-left:20px;
+          margin-bottom:20px;
+      }
+      .giohang p{
+        top:-10px;
+        right: -15px;
+      }
+
+
+
+
+
+      .user{
+
+      }
+  }
+
+
+
       
     
