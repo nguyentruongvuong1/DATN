@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react';
 import Profile from '../../components/User/User_profile/Profile';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-
+import {thoat} from '../../AuthSlice'
+import { useDispatch } from 'react-redux';
+import "@ant-design/v5-patch-for-react-19";
+import { message } from "antd";
 export default function Userprofile() {
     const [activeTab, setActiveTab] = useState('profile');
     const user = useSelector((state) => state.auth.user);
     const DaDangNhap = useSelector((state) => state.auth.DaDangNhap);
     const isChecked = useSelector((state) => state.auth.isChecked);
-
+    const dispatch = useDispatch();
     const [userData, setUserData] = useState(null);
 
     useEffect(() => {
@@ -77,9 +80,22 @@ export default function Userprofile() {
                     >
                         Đơn hàng của tôi
                     </button>
-                    <a href="#" className={styles["menu-item"]}>
+                    <button onClick={() => {
+                        const hoi = confirm("Bạn có chắc chắn muốn đăng xuất tài khoản không?");
+                        if(hoi){
+                            dispatch(thoat());
+                            message.success("Đăng xuất thành công!");
+                            setTimeout(() => {
+                                window.location.href = "/";
+                            }, 1000);
+                        }
+                        else{
+                            return;
+                        }
+                        
+                    }} className={styles["menu-item"]}>
                         Đăng xuất
-                    </a>
+                    </button>
                 </div>
             </div>
 
