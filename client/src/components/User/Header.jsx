@@ -150,7 +150,19 @@ const Header = () => {
                     <button className={styles.btn} onClick={() => { message.success('Bạn đã đăng xuất tài khoản thành công'); dispatch(thoat())}}>Đăng xuất</button>
                   </div>
                 </div>
-              ) : (
+              ) : DaDangNhap === true && user?.role === 0 ?(
+                <div className={styles.userContainer}>
+                  <div className={styles.user}>
+                    <img width="35px" height="35px" src="/images/user_circle.webp" alt="User" />
+                    <p>{user?.username.length > 4 ? user.username.slice(0, 4) + "..." : user.username}</p>
+                  </div>
+            
+                  <div className={styles.dropdownMenu}>
+                    <Link to={`/admin`}>Trang admin</Link>
+                    <button className={styles.btn} onClick={() => { message.success('Bạn đã đăng xuất tài khoản thành công'); dispatch(thoat())}}>Đăng xuất</button>
+                  </div>
+                </div>
+              ) :(
                 <>
                   <Link to={"/dangnhap"}>Đăng Nhập</Link>
                   <Link to={"/dangky"}>Đăng Ký</Link>
