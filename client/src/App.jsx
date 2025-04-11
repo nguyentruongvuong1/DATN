@@ -31,7 +31,7 @@ import AdminUser from "./pages/Admin/Adminuser";
 import AdminOrder from "./pages/Admin/AdminOrder";
 import FormThemSanPham from "./components/Admin/AdminAddPr";
 
-// import ProtectAdmin from "./ProtectAdmin";
+import ProtectAdmin from "./ProtectAdmin";
 
 function App() {
   return (
