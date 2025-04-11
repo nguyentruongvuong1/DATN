@@ -1,11 +1,11 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import moment from 'moment';
-const initialState = {DaDangNhap: false, user: null, token: null, expiresIn: 0, countPrlike: 0, isChecked: false,}
+const initialState = {DaDangNhap: false, user: null,  token: null, expiresIn: 0, countPrlike: 0, isChecked: false,}
 
 export const fetchCountPrLike = createAsyncThunk(
     'auth/fetchCountPrLike',
     async (userId) => {
-      const response = await fetch(`http://localhost:3000/pr/count-pr-like/${userId}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/pr/count-pr-like/${userId}`);
       const data = await response.json();
       return data.count; // API trả về số lượng sản phẩm yêu thích
     }
@@ -24,6 +24,7 @@ export const AuthSlice = createSlice({
             const expiresAt = localStorage.getItem('expiresAt');
 
             if (!token || !user || !expiresAt) {
+                
                 state.DaDangNhap = false;
                 state.isChecked = true
                 return;
@@ -36,6 +37,7 @@ export const AuthSlice = createSlice({
                 state.user = JSON.parse(user);
                 state.token = token;
                 // state.expiresIn = Number(expiresIn);
+                state.isChecked = true;
                 state.DaDangNhap = true;
             } else {
                 // Nếu token hết hạn, tự động đăng xuất
@@ -43,6 +45,7 @@ export const AuthSlice = createSlice({
                 state.user = null;
                 state.expiresIn = 0;
                 state.DaDangNhap = false;
+                state.isChecked = true;
 
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
@@ -56,6 +59,7 @@ export const AuthSlice = createSlice({
             state.expiresIn = params.payload.expiresIn
             state.user = params.payload.userInfo;
             state.DaDangNhap = true;
+            state.isChecked = true;
             localStorage.setItem('token', state.token);
             localStorage.setItem('user', JSON.stringify(state.user));
             localStorage.setItem('expiresIn', state.expiresIn)

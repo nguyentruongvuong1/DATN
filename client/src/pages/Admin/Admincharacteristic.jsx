@@ -7,6 +7,7 @@ import "../../styles/Admin/styleadmin.css";
 import moment from "moment"; // Import moment.js để định dạng ngày tháng
 const Admincharacteristic = () => {
     const [characteristic, setcharacteristics] = useState([]);
+    const [allDd, setalldd] = useState([]); // Tất cả characteristic để tìm kiếm
     const [editcharacteristic, setEditcharacteristic] = useState(null); // Lưu characteristic đang chỉnh sửa
     const [showAddForm, setShowAddForm] = useState(false); // Ẩn/hiện form
     const [categories, setCategories] = useState([]);
@@ -14,7 +15,11 @@ const Admincharacteristic = () => {
         cate_id: "",  // Không để undefined
         name: "",     // Không để undefined
     });
-    
+
+    const [search, setsearch] = useState(''); // Trạng thái tìm kiếm
+    const [Ddfilter, ganddfilter] = useState([]) // Trạng thái tìm kiếm
+    const [sortOrder, setSortOrder] = useState("asc"); // Trạng thái sắp xếp (tăng dần hoặc giảm dần)
+
 
     // Lấy danh sách characteristics khi component mount
     useEffect(() => {
@@ -26,10 +31,25 @@ const Admincharacteristic = () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/adminc/characteristic`);
             setcharacteristics(response.data);
+            setalldd(response.data); // gán allVc với dữ liệu characteristic
         } catch (error) {
             console.error("Lỗi khi lấy dữ liệu:", error);
         }
     };
+
+    const onchangeSearch = (e) => {
+        setsearch(e.target.value)
+    }
+
+    useEffect(() => {
+        if (search === '') {
+            ganddfilter(characteristic)
+        } else {
+            const FilterDd = allDd.filter(dd => dd.name.toLowerCase().includes(search.toLowerCase()))
+            ganddfilter(FilterDd)
+        }
+
+    }, [search, allDd, characteristic])
 
     // Hàm xóa characteristic
     const handleDelete = async (id) => {
@@ -121,6 +141,19 @@ const Admincharacteristic = () => {
         }
     };
 
+    const handleSort = () => {
+        const sortedCharacteristic = [...characteristic]; // Tạo một bản sao của mảng vouchers để không làm thay đổi mảng gốc
+        if (sortOrder === "asc") {
+            sortedCharacteristic.sort((a, b) => a.id - b.id); // Sắp xếp tăng dần
+            setSortOrder("desc");
+        } else {
+            sortedCharacteristic.sort((a, b) => b.id - a.id); // Sắp xếp giảm dần
+            setSortOrder("asc");
+        }
+        setcharacteristics(sortedCharacteristic); // Cập nhật lại vouchers với thứ tự đã sắp xếp
+    };
+
+
     return (
         <div className="main">
             <div className="topbar">
@@ -129,7 +162,12 @@ const Admincharacteristic = () => {
                 </div>
                 <div className="search">
                     <label>
-                        <input type="text" placeholder="Tìm kiếm" />
+                        <input
+                            type="text"
+                            value={search}
+                            onChange={onchangeSearch} placeholder="Tìm kiếm..."
+
+                        />
                         <Search size={24} />
                     </label>
                 </div>
@@ -147,7 +185,9 @@ const Admincharacteristic = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th onClick={handleSort} style={{ cursor: "pointer" }}>
+                                    ID {sortOrder === "asc" ? "↑" : "↓"}
+                                </th>
                                 <th>Tên Đặc Điểm</th>
                                 <th>Danh Mục</th>
                                 <th>Ngày tạo</th>
@@ -155,7 +195,7 @@ const Admincharacteristic = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {characteristic.map((characteristic, index) => (
+                            {Ddfilter.map((characteristic, index) => (
                                 <tr key={index}>
                                     <td>{characteristic.id}</td>
                                     <td>{characteristic.name}</td>
@@ -201,7 +241,7 @@ const Admincharacteristic = () => {
                                     <input type="text" name="name" value={newcharacteristic.name} onChange={handleNewcharacteristicChange} required />
                                     <label>Danh Mục:</label>
                                     <select name="cate_id" value={newcharacteristic.cate_id || ""} onChange={handleNewcharacteristicChange} required>
-                                    <option value="">-- Chọn danh mục --</option>
+                                        <option value="">-- Chọn danh mục --</option>
                                         {categories.map((cate) => (
                                             <option key={cate.id} value={cate.id}>
                                                 {cate.name}

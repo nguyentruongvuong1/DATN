@@ -8,6 +8,7 @@ import { Menu, Search } from "lucide-react";
 
 const AdminVoucher = () => {
   const [vouchers, setVouchers] = useState([]);
+  const [allVc, setallVc] = useState([]); // Tất cả voucher để tìm kiếm
   const [formData, setFormData] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -15,6 +16,8 @@ const AdminVoucher = () => {
   const [itemsPerPage] = useState(8); // Số voucher mỗi trang
   const [totalVouchers, setTotalVouchers] = useState(0);
   const [sortOrder, setSortOrder] = useState("asc"); // Trạng thái sắp xếp (tăng dần hoặc giảm dần)
+  const [search, setsearch] = useState(''); // Trạng thái tìm kiếm
+  const [vcfilter, ganvcfilter] = useState([]) // Trạng thái tìm kiếm
 
 
   useEffect(() => {
@@ -25,6 +28,7 @@ const AdminVoucher = () => {
         );
         setVouchers(response.data.vouchers || response.data);
         setTotalVouchers(response.data.total || response.data.length);
+        setallVc(response.data.vouchers || response.data); // gán allVc với dữ liệu voucher
       } catch (error) {
         console.error("Lỗi khi tải voucher:", error);
       }
@@ -32,6 +36,19 @@ const AdminVoucher = () => {
     fetchVouchers();
   }, [currentPage, itemsPerPage]);
 
+  const onchangeSearch = (e) =>{
+    setsearch(e.target.value)
+  }
+
+  useEffect(() =>{
+    if(search === ''){
+      ganvcfilter(vouchers)
+    }else{
+      const FilterVc = allVc.filter( vc => vc.code.toLowerCase().includes(search.toLowerCase()))
+      ganvcfilter(FilterVc)
+    }
+     
+  },[search, allVc, vouchers])
 
   const fetchVouchers = async () => {
     try {
@@ -98,7 +115,12 @@ const AdminVoucher = () => {
         </div>
         <div className="search">
           <label>
-            <input type="text" placeholder="Tìm kiếm" />
+          <input
+            type="text"
+            value={search}
+            onChange={onchangeSearch} placeholder="Tìm kiếm..."
+           
+/>
             <Search size={24} />
           </label>
         </div>
@@ -130,7 +152,7 @@ const AdminVoucher = () => {
               </tr>
             </thead>
             <tbody>
-              {vouchers.map((voucher) => (
+              {vcfilter.map((voucher) => (
                 <tr key={voucher.id}>
                   <td>{voucher.id}</td>
                   <td>{voucher.code}</td>

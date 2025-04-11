@@ -2,15 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import "../../styles/Admin/styleadmin.css";
+import { Search } from "lucide-react";
+
+
 
 const AdminBanner = () => {
   const [banners, setBanners] = useState([]);
+  const [allBn, setallBn] = useState([]); // Tất cả banner để tìm kiếm
   const [formData, setFormData] = useState({ status: 1, image: null });
   const [showForm, setShowForm] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const [totalBanners, setTotalBanners] = useState(0);
+  const [search, setsearch] = useState(''); // Trạng thái tìm kiếm
+  const [bnfilter, ganbnfilter] = useState([]) // Trạng thái tìm kiếm
+  const [sortOrder, setSortOrder] = useState("asc"); // Trạng thái sắp xếp (tăng dần hoặc giảm dần)
+
 
   useEffect(() => {
     fetchBanners();
@@ -23,10 +31,25 @@ const AdminBanner = () => {
       );
       setBanners(response.data.banners);
       setTotalBanners(response.data.total);
+      setallBn(response.data.banners); // gán allBn với dữ liệu banner
     } catch (error) {
       console.error("Lỗi khi tải banner:", error);
     }
   };
+
+  const onchangeSearch = (e) => {
+    setsearch(e.target.value)
+  }
+
+  useEffect(() => {
+    if (search === '') {
+      ganbnfilter(banners)
+    } else {
+      const FilterBn = allBn.filter(bn => String(bn.id).toLowerCase().includes(search.toLowerCase()))
+      ganbnfilter(FilterBn)
+    }
+
+  }, [search, allBn, banners])
 
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc muốn xóa banner này không?")) return;
@@ -72,6 +95,18 @@ const AdminBanner = () => {
     setCurrentPage(selectedItem.selected + 1);
   };
 
+  const handleSort = () => {
+    const sortedBanner = [...banners]; // Tạo một bản sao của mảng vouchers để không làm thay đổi mảng gốc
+    if (sortOrder === "asc") {
+      sortedBanner.sort((a, b) => a.id - b.id); // Sắp xếp tăng dần
+      setSortOrder("desc");
+    } else {
+      sortedBanner.sort((a, b) => b.id - a.id); // Sắp xếp giảm dần
+      setSortOrder("asc");
+    }
+    setBanners(sortedBanner); // Cập nhật lại vouchers với thứ tự đã sắp xếp
+  };
+
   return (
     <div className="main">
       <div className="topbar">
@@ -80,8 +115,13 @@ const AdminBanner = () => {
         </div>
         <div className="search">
           <label>
-            <input type="text" placeholder="Tìm kiếm" />
-            <ion-icon name="search-outline"></ion-icon>
+            <input
+              type="text"
+              value={search}
+              onChange={onchangeSearch} placeholder="Tìm kiếm..."
+
+            />
+            <Search size={24} />
           </label>
         </div>
         <div className="user">
@@ -98,7 +138,7 @@ const AdminBanner = () => {
               onClick={() => {
                 setShowForm(true);
                 setIsEdit(false);
-                setFormData({ status: 1, image: null });
+                setFormData({ status: 1, image: null });  
               }}
             >
               Thêm Banner
@@ -108,7 +148,9 @@ const AdminBanner = () => {
           <table>
             <thead>
               <tr>
-                <th>ID</th>
+              <th onClick={handleSort} style={{ cursor: "pointer" }}>
+                  ID {sortOrder === "asc" ? "↑" : "↓"}
+                </th>
                 <th>Hình ảnh</th>
                 <th>Trạng thái</th>
                 <th>Ngày tạo</th>
@@ -116,13 +158,13 @@ const AdminBanner = () => {
               </tr>
             </thead>
             <tbody>
-              {banners.map((banner) => (
+              {bnfilter.map((banner) => (
                 <tr key={banner.id}>
                   <td>{banner.id}</td>
                   <td>
                     <img
                       src={
-                        banner.image 
+                        banner.image
                       }
                       alt="Banner"
                       style={{ width: "120px" }}
@@ -208,15 +250,15 @@ const AdminBanner = () => {
 
                   {formData.image && (
                     <img
-                    src={
-                      formData.image instanceof File
-                        ? URL.createObjectURL(formData.image)
-                        : `${import.meta.env.VITE_API_URL}/${formData.image}`
-                    }
-                    alt="Preview"
-                    style={{ width: "150px", marginTop: "10px" }}
-                  />
-                )}
+                      src={
+                        formData.image instanceof File
+                          ? URL.createObjectURL(formData.image)
+                          : `${import.meta.env.VITE_API_URL}/${formData.image}`
+                      }
+                      alt="Preview"
+                      style={{ width: "150px", marginTop: "10px" }}
+                    />
+                  )}
 
                   <button type="submit">Lưu</button>
                   <button

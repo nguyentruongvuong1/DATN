@@ -2,12 +2,20 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/Admin/styleadmin.css";
 import ReactPaginate from "react-paginate";
+import { Search } from "lucide-react";
+
 
 const AdminUser = () => {
     const [users, setUsers] = useState([]);
+    const [allUs, setallUs] = useState([]); // Tất cả để tìm kiếm
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8);
     const [totalUsers, setTotalUsers] = useState(0);
+    const [search, setsearch] = useState(''); // Trạng thái tìm kiếm
+    const [usfilter, ganusfilter] = useState([]) // Trạng thái tìm kiếm
+    const [sortOrder, setSortOrder] = useState("asc"); // Trạng thái sắp xếp (tăng dần hoặc giảm dần)
+
+
 
     useEffect(() => {
         fetchUsers();
@@ -20,19 +28,32 @@ const AdminUser = () => {
             );
             setUsers(data.users || []);
             setTotalUsers(data.total || 0);
+            setallUs(data.users || []); // gán allUs với dữ liệu users
         } catch (error) {
             console.error("Lỗi khi lấy dữ liệu:", error);
         }
     };
 
+    const onchangeSearch = (e) => {
+        setsearch(e.target.value)
+    }
 
+    useEffect(() => {
+        if (search === '') {
+            ganusfilter(users)
+        } else {
+            const FilterUs = allUs.filter(us => us.username.toLowerCase().includes(search.toLowerCase()))
+            ganusfilter(FilterUs)
+        }
+
+    }, [search, allUs, users])
 
 
 
     const handlePageChange = (selectedItem) => {
         setCurrentPage(selectedItem.selected + 1);
     };
-    
+
     const handleStatusChange = async (userId, newStatus) => {
         try {
             await axios.put(`${import.meta.env.VITE_API_URL}/admin/user/${userId}`, { status: newStatus });
@@ -43,6 +64,18 @@ const AdminUser = () => {
         }
     };
 
+    const handleSort = () => {
+        const sortedUser = [...users]; // Tạo một bản sao của mảng vouchers để không làm thay đổi mảng gốc
+        if (sortOrder === "asc") {
+            sortedUser.sort((a, b) => a.id - b.id); // Sắp xếp tăng dần
+            setSortOrder("desc");
+        } else {
+            sortedUser.sort((a, b) => b.id - a.id); // Sắp xếp giảm dần
+            setSortOrder("asc");
+        }
+        setUsers(sortedUser); // Cập nhật lại vouchers với thứ tự đã sắp xếp
+    };
+
 
     return (
         <div className="main">
@@ -51,10 +84,13 @@ const AdminUser = () => {
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
                 <div className="search">
-                    <label>
-                        <input type="text" placeholder="Tìm kiếm" />
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
+                    <input
+                        type="text"
+                        value={search}
+                        onChange={onchangeSearch} placeholder="Tìm kiếm..."
+
+                    />
+                    <Search size={24} />
                 </div>
                 <div className="user">
                     <img src="/images/user.jpg" alt="User" />
@@ -69,7 +105,9 @@ const AdminUser = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th onClick={handleSort} style={{ cursor: "pointer" }}>
+                                    ID {sortOrder === "asc" ? "↑" : "↓"}
+                                </th>
                                 <th>Tên đăng nhập</th>
                                 <th>Tên</th>
                                 <th>Điện thoại</th>
@@ -85,7 +123,7 @@ const AdminUser = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((user) => (
+                            {usfilter.map((user) => (
                                 <tr key={user.id}>
                                     <td>{user.id}</td>
                                     <td>{user.username}</td>

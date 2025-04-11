@@ -8,9 +8,13 @@ import "../../styles/Admin/styleadmin.css";
 
 const Admincate = () => {
   const [cate, setcates] = useState([]);
+  const [allCt, setallCt] = useState([]); // Tất cả cate để tìm kiếm
   const [editcate, setEditcate] = useState(null); // Lưu cate đang chỉnh sửa
   const [showAddForm, setShowAddForm] = useState(false); // Ẩn/hiện form
-  const [searchTerm, setSearchTerm] = useState('');
+  const [search, setsearch] = useState(''); // Trạng thái tìm kiếm
+  const [ctfilter, ganctfilter] = useState([]) // Trạng thái tìm kiếm
+  const [sortOrder, setSortOrder] = useState("asc"); // Trạng thái sắp xếp (tăng dần hoặc giảm dần)
+
 
   const [newcate, setNewcate] = useState({
     name: "",
@@ -24,6 +28,7 @@ const Admincate = () => {
     axios.get(`${import.meta.env.VITE_API_URL}/adminc/cate`)
       .then((response) => {
         setcates(response.data);
+        setallCt(response.data); // gán allCt với dữ liệu cate
       })
       .catch((error) => {
         console.error("Lỗi khi lấy dữ liệu:", error);
@@ -39,16 +44,20 @@ const Admincate = () => {
     }
   };
 
+  const onchangeSearch = (e) => {
+    setsearch(e.target.value)
+  }
+
   useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      axios
-        .get(`${import.meta.env.VITE_API_URL}/adminc/cate?search=${encodeURIComponent(searchTerm)}`)
-        .then((res) => setcates(res.data))
-        .catch((err) => console.error("Lỗi tìm kiếm:", err));
-    }, 300); // debounce 300ms
-  
-    return () => clearTimeout(delayDebounce);
-  }, [searchTerm]);
+    if (search === '') {
+      ganctfilter(cate)
+    } else {
+      const FilterCt = allCt.filter(ct => ct.name.toLowerCase().includes(search.toLowerCase()))
+      ganctfilter(FilterCt)
+    }
+
+  }, [search, allCt, cate])
+
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc muốn xóa cate này không?")) return;
 
@@ -118,11 +127,6 @@ const Admincate = () => {
     }
   };
 
-
-
-
-
-
   // Hàm mở form sửa
   const handleEdit = (cate) => {
     setEditcate(cate);
@@ -168,6 +172,18 @@ const Admincate = () => {
     }
   };
 
+  const handleSort = () => {
+    const sortedCate = [...cate]; // Tạo một bản sao của mảng vouchers để không làm thay đổi mảng gốc
+    if (sortOrder === "asc") {
+      sortedCate.sort((a, b) => a.id - b.id); // Sắp xếp tăng dần
+      setSortOrder("desc");
+    } else {
+      sortedCate.sort((a, b) => b.id - a.id); // Sắp xếp giảm dần
+      setSortOrder("asc");
+    }
+    setcates(sortedCate); // Cập nhật lại vouchers với thứ tự đã sắp xếp
+  };
+
 
   return (
 
@@ -178,16 +194,16 @@ const Admincate = () => {
           <Menu size={24} />
         </div>
         <div className="search">
-  <label>
-    <input
-      type="text"
-      placeholder="Tìm kiếm"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    <Search size={24} />
-  </label>
-</div>
+          <label>
+            <input
+              type="text"
+              value={search}
+              onChange={onchangeSearch} placeholder="Tìm kiếm..."
+
+            />
+            <Search size={24} />
+          </label>
+        </div>
 
         <div className="user">
           <img src="/images/user.jpg" alt="User" />
@@ -203,7 +219,9 @@ const Admincate = () => {
           <table>
             <thead>
               <tr>
-                <th>ID</th>
+              <th onClick={handleSort} style={{ cursor: "pointer" }}>
+                  ID {sortOrder === "asc" ? "↑" : "↓"}
+                </th>
                 <th>Ảnh</th>
                 <th>Tên Danh Mục</th>
                 <th>Nội dung</th>
@@ -213,23 +231,23 @@ const Admincate = () => {
               </tr>
             </thead>
             <tbody>
-              {cate.map((cate) => (
+              {ctfilter.map((cate) => (
                 <tr key={cate.id}>
                   <td>{cate.id}</td>
                   <td><img style={{ width: '50px', height: '50px' }} src={
-                        cate.image &&
-                        cate.image.startsWith("../../public/images")
-                          ? `${import.meta.env.VITE_API_URL}/${cate.image}`
-                          : cate.image 
-                      } alt="" /></td>
+                    cate.image &&
+                      cate.image.startsWith("../../public/images")
+                      ? `${import.meta.env.VITE_API_URL}/${cate.image}`
+                      : cate.image
+                  } alt="" /></td>
                   <td>{cate.name}</td>
                   <td width={'250px'}>{cate.content.length > 30 ? cate.content.slice(0, 30) + '...' : cate.content}</td>
                   <td><img style={{ width: '50px', height: '50px' }} src={
-                        cate.image_content &&
-                        cate.image_content.startsWith("../../public/images")
-                          ? `${import.meta.env.VITE_API_URL}/${cate.image_content}`
-                          : cate.image_content 
-                      }
+                    cate.image_content &&
+                      cate.image_content.startsWith("../../public/images")
+                      ? `${import.meta.env.VITE_API_URL}/${cate.image_content}`
+                      : cate.image_content
+                  }
                     alt="" /></td>
                   <td>{moment(cate.create_date).format('DD-MM-YYYY')}</td>
                   <td>

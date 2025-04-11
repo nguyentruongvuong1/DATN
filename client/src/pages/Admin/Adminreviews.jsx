@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, Search, Eye  } from "lucide-react";
+import { Menu, Search, Eye } from "lucide-react";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import "../../styles/Admin/styleadmin.css";
@@ -10,10 +10,14 @@ import moment from "moment";
 
 const AdminReviews = () => {
     const [reviews, setReviews] = useState([]);
+    const [allRv, setallRv] = useState([]); // Tất cả để tìm kiếm
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(8);
     const [totalReviews, setTotalReviews] = useState(0);
-    
+    const [sortOrder, setSortOrder] = useState("asc"); // Trạng thái sắp xếp (tăng dần hoặc giảm dần)
+    const [search, setsearch] = useState(''); // Trạng thái tìm kiếm
+    const [rvfilter, ganrvfilter] = useState([]) // Trạng thái tìm kiếm
+
     // const navigate = useNavigate();
     // const handleViewReview = (productId) => {
     //     navigate(`/chi_tiet_san_pham/${productId}`);
@@ -21,14 +25,15 @@ const AdminReviews = () => {
 
     useEffect(() => {
         fetchReviews();
-        
+
     }, [currentPage]);
 
-    const fetchReviews  = async () => {
+    const fetchReviews = async () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/admin/reviews?page=${currentPage}&limit=${itemsPerPage}`);
             setReviews(response.data.comments || response.data);
             setTotalReviews(response.data.total || response.data.length);
+            setallRv(response.data.comments || response.data); // gán allRv với dữ liệu reviews
             console.log(response.data);
 
         } catch (error) {
@@ -36,11 +41,37 @@ const AdminReviews = () => {
         }
     };
 
-    
+    const onchangeSearch = (e) => {
+        setsearch(e.target.value)
+    }
+
+    useEffect(() => {
+        if (search === '') {
+            ganrvfilter(reviews)
+        } else {
+            const FilterRv = allRv.filter(rv => rv.user_name.toLowerCase().includes(search.toLowerCase()))
+            ganrvfilter(FilterRv)
+        }
+
+    }, [search, allRv, reviews])
+
 
     const handlePageChange = (selectedItem) => {
         setCurrentPage(selectedItem.selected + 1);
     };
+
+    const handleSort = () => {
+        const sortedReview = [...reviews]; // Tạo một bản sao của mảng vouchers để không làm thay đổi mảng gốc
+        if (sortOrder === "asc") {
+            sortedReview.sort((a, b) => a.id - b.id); // Sắp xếp tăng dần
+            setSortOrder("desc");
+        } else {
+            sortedReview.sort((a, b) => b.id - a.id); // Sắp xếp giảm dần
+            setSortOrder("asc");
+        }
+        setReviews(sortedReview); // Cập nhật lại vouchers với thứ tự đã sắp xếp
+    };
+
 
     return (
         <div className="main">
@@ -50,7 +81,12 @@ const AdminReviews = () => {
                 </div>
                 <div className="search">
                     <label>
-                        <input type="text" placeholder="Tìm kiếm" />
+                        <input
+                            type="text"
+                            value={search}
+                            onChange={onchangeSearch} placeholder="Tìm kiếm..."
+
+                        />
                         <Search size={24} />
                     </label>
                 </div>
@@ -66,7 +102,9 @@ const AdminReviews = () => {
                     <table className="comment-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th onClick={handleSort} style={{ cursor: "pointer" }}>
+                                    ID {sortOrder === "asc" ? "↑" : "↓"}
+                                </th>
                                 <th>Người Dùng</th>
                                 <th>Sản Phẩm</th>
                                 <th>Nội dung</th>
@@ -76,19 +114,19 @@ const AdminReviews = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {reviews.map((review) => (
+                            {rvfilter.map((review) => (
                                 <tr key={review.id}>
                                     <td>{review.id}</td>
                                     <td>{review.user_name}</td>
-                                    <td>{review.product_name.length > 20 ? review.product_name.slice(0, 20)+'...' : review.product_name}</td>
+                                    <td>{review.product_name.length > 20 ? review.product_name.slice(0, 20) + '...' : review.product_name}</td>
                                     <td width={'200px'}>{review.content}</td>
                                     <td>{review.start}</td>
                                     <td>{moment(review.create_date).format(' DD-MM-YYYY')}</td>
                                     <td>
-                                    <button className="xemdanhgia" >
-                                        <Link to={`/chi_tiet_san_pham/${review.pr_id}`} >
-                                     Xem đánh giá
-                                        </Link>
+                                        <button className="xemdanhgia" >
+                                            <Link to={`/chi_tiet_san_pham/${review.pr_id}`} >
+                                                Xem đánh giá
+                                            </Link>
                                         </button>                                    </td>
                                 </tr>
                             ))}
