@@ -17,6 +17,7 @@ import VerifyOTP from "./pages/User/VetiFyOtp";
 import Payment from "./pages/User/Payment";
 import Lienhe from "./pages/User/Lienhe";
 import Userprofile from "./pages/User/Userprofile";
+import Checkpayment from "./pages/User/checkpayment";
 
 
 import AdminVoucher from "./pages/Admin/Adminvoucher";
@@ -52,6 +53,7 @@ function App() {
           <Route path="/thanhtoan" element={<Payment />} />
           <Route path="/lienhe" element={<Lienhe />} />
           <Route path="/info" element={<Userprofile />} />
+          <Route path="/check_payment" element={<Checkpayment />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
