@@ -1,28 +1,25 @@
-
-
-
-
-h1{
-    margin: 0px;
+h1 {
+  margin: 0px;
 }
 
 
-.bgwhite{
-    background-color: white;
-    
+.bgwhite {
+  background-color: white;
+
 }
 
-.container{
-    max-width: 1200px;
-    margin: 0 auto;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* header */
 .bgxanh {
-    background-color: #214738;
-    padding: 5px 0; 
-    z-index: 2; /* cao hơn .bgheader nếu cần */
-    /* position: relative; */
+  background-color: #214738;
+  padding: 5px 0;
+  z-index: 2;
+  /* cao hơn .bgheader nếu cần */
+  /* position: relative; */
 }
 
 /* .fixedHeader {
@@ -30,13 +27,13 @@ h1{
     top: 0;
     left: 0;
     right: 0;
-    z-index: 999; 
+    z-index: 999;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s ease-in-out;
     animation: slideDown 0.5s ease-in-out forwards;
   } */
 
-  /* Hiệu ứng trượt xuống khi hiện fixedHeader */
+/* Hiệu ứng trượt xuống khi hiện fixedHeader */
 /* @keyframes slideDown {
     from {
       transform: translateY(-100%);
@@ -49,556 +46,594 @@ h1{
   } */
 
 .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 35px;
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35px;
+
 }
 
 .header-top_info {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* Thay vì 10px */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* Thay vì 10px */
 }
 
 .header-top_info i {
-    color: #ccc;
-    font-size: 0.9rem; /* Điều chỉnh linh hoạt */
+  color: #ccc;
+  font-size: 0.9rem;
+  /* Điều chỉnh linh hoạt */
 }
 
 .header-top_info_phone,
 .header-top_info_time {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .header-top_info_time:hover i,
-.header-top_info_time:hover p{
-    color: white;
+.header-top_info_time:hover p {
+  color: white;
 }
 
 .header-top_info_phone:hover i,
-.header-top_info_phone:hover p{
-    color: white;
+.header-top_info_phone:hover p {
+  color: white;
 }
 
 .header-top_info p {
-    color: #ccc;
-    font-size: 0.9rem;
-    margin: 0;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .header-top_icon {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .header-top_icon_tim {
-    position: relative;
-    color: white;
-    font-size: 1.1rem;
+  position: relative;
+  color: white;
+  font-size: 1.1rem;
 }
 
 
 
 .header-top_icon_tim p {
-    position: absolute;
-    top: -10px;
-    right: -9px;
-    background-color: #00791C;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: bold;
-    width: 15px;
-    height: 15px;
-    text-align: center;
-    border-radius: 50%;
-    line-height: 15px;
+  position: absolute;
+  top: -10px;
+  right: -9px;
+  background-color: #00791C;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 15px;
 }
 
-.header-top_icon_tim i{
-    padding: 6px;
-    font-size: 16px;
+.header-top_icon_tim i {
+  padding: 6px;
+  font-size: 16px;
 }
 
 .header-top_icon_tim i:hover {
-    background-color: #0b2a12;
-    padding: 6px;
-    border-radius: 50%;
+  background-color: #0b2a12;
+  padding: 6px;
+  border-radius: 50%;
 }
 
 .header-top_icon a {
-    color: #ccc;
-    font-size: 0.9rem;
-    text-decoration: none;
+  color: #ccc;
+  font-size: 0.9rem;
+  text-decoration: none;
 }
 
 .header-top_icon p {
-    margin: 0;
-    color: #ccc;
+  margin: 0;
+  color: #ccc;
 }
 
 .header-top_icon a:hover {
-    color: white;
+  color: white;
 }
 
 
 
-.bgheader{
-    /* position: fixed; */
-    z-index: 1;
-    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    background-color: #FCF9F3;
-    transition: top 0.3s ease-in-out;
+.bgheader {
+  /* position: fixed; */
+  z-index: 1;
+  box-shadow: 0 4px 2px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  background-color: #FCF9F3;
+  transition: top 0.3s ease-in-out;
 }
 
-.tongheader{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    height: auto;
+.tongheader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: auto;
 }
 
-.logo{
-    
-    display: flex;
-    align-items: center;
+.logo {
+
+  display: flex;
+  align-items: center;
 }
 
-.logo img{
-    width: 100%;
-    height: 35px;
-    max-width: 225px;
+.logo img {
+  width: 100%;
+  height: 35px;
+  max-width: 225px;
+}
+
+span.header_blog {
+  text-decoration: none;
+  color: black;
+  margin-left: -100px;
+  top: 68px;
+  position: absolute;
+}
+
+.header_blog {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: 40px;
+  font-size: 21px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+
+}
+
+.header_icon {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 24px;
+
+}
+
+.search,
+.giohang {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
 }
 
 
-.header_icon{
-   display: flex;
-   align-items: center;
-    gap: 30px;
-   font-size: 24px; 
 
+.search i {
+  font-size: 24px;
+  cursor: pointer;
 }
 
-.search, .giohang {
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-}
-
-.search i{
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.giohang i{
-    font-size: 24px;
-    color:  black;
+.giohang i {
+  font-size: 24px;
+  color: black;
 }
 
 .search i:hover {
-    color: #224229;
+  color: #224229;
 }
 
 .giohang i:hover {
-    color: #224229;
+  color: #224229;
 }
 
 
-.giohang{
-    position: relative;
+.giohang {
+  position: relative;
 }
 
-.giohang p{
-    position: absolute;
-    top: -20px; 
-    right: -10px; 
-    background-color: #00791C;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    line-height: 20px;
+.giohang p {
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  background-color: #00791C;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 20px;
 }
 
 
 
-.tendanhmuc_down{
-    display: inline;
-    height: 90px;
-    line-height: 90px;
-    margin: 0 10px;
+.tendanhmuc_down {
+  display: inline;
+  height: 90px;
+  line-height: 90px;
+  margin: 0 10px;
 }
 
-.tendanhmuc_down a{
-text-decoration: none;
-color: #15351c;
-font-size: 20px;
-margin-right: 5px;
+.tendanhmuc_down a {
+  text-decoration: none;
+  color: #15351c;
+  font-size: 20px;
+  margin-right: 5px;
 }
 
-.tendanhmuc_down i{
-opacity: 50%;
-font-size: 14px;
+.tendanhmuc_down i {
+  opacity: 50%;
+  font-size: 14px;
 }
 
 .header_menucon {
-    position: absolute;
-    width: 100%;
-    background-color: #FCF9F3;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 40px 175px; 
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
-    visibility: hidden; /* Thay vì display: none */
-    opacity: 0; /* Làm mờ */
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    z-index: 10; /* Giữ menu hiển thị trên các phần khác */
+  position: absolute;
+  width: 100%;
+  background-color: #FCF9F3;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 40px 175px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  /* Thay vì display: none */
+  opacity: 0;
+  /* Làm mờ */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 10;
+  /* Giữ menu hiển thị trên các phần khác */
 }
 
 .tendanhmuc_down:hover .header_menucon,
 .header_menucon:hover {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
-.tendanhmuc_down:hover > i,.tendanhmuc_down:hover > a{
-   color: #00791C;
-}
-
-
-
-.header_menucon_item h3{
-    margin: 0;
-    height: 50px;
-    line-height: 50px;
-    font-size: 20px;
-    text-align: left;
+.tendanhmuc_down:hover>i,
+.tendanhmuc_down:hover>a {
+  color: #00791C;
 }
 
 
 
-.header_menucon_cate{
-    height: 40px;
-    line-height: 40px;
+.header_menucon_item h3 {
+  margin: 0;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: left;
 }
 
 
 
-.header_menucon_cate a{
-    text-decoration: none;
-    color: #15351c;
-    font-size: 16px;
+.header_menucon_cate {
+  height: 40px;
+  line-height: 40px;
 }
 
-.header_menucon_cate i{
-    text-decoration: none;
-    color: #15351c;
-    font-size: 13px;
-    margin-right: 5px;
+
+
+.header_menucon_cate a {
+  text-decoration: none;
+  color: #15351c;
+  font-size: 16px;
 }
 
-.header_menucon_cate:hover a,.header_menucon_cate:hover i{
-    color: #53BD51;
+.header_menucon_cate i {
+  text-decoration: none;
+  color: #15351c;
+  font-size: 13px;
+  margin-right: 5px;
 }
 
-.user{
-    display: flex;
+.header_menucon_cate:hover a,
+.header_menucon_cate:hover i {
+  color: #53BD51;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+
+/* Search */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.searchicon {
+  display: flex;
+}
+
+.searchicon_icon {
+  color: #ccc;
+  font-size: 18px;
+  position: absolute;
+  right: 0%;
+  margin-top: 10px;
+  margin-right: 25px;
+  font-size: 30px;
+}
+
+.searchBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  ;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 100;
+  width: 50%;
+  cursor: pointer;
+}
+
+.searchInput {
+  width: 100%;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.396);
+  padding: 8px;
+  border-radius: 50px;
+  outline: none;
+  color: #ccc;
+  border-style: none;
+  font-size: 20px;
+}
+
+.searchInput::placeholder {
+  color: #ccc;
+
+  font-size: 20px;
+}
+
+.close {
+  position: fixed;
+  top: 0%;
+  margin-top: 20px;
+  margin-right: 20px;
+  right: 0%;
+  z-index: 100;
+}
+
+.close button {
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0.012);
+}
+
+/* sanr pham search */
+
+.pr_search_container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.pr_search {
+  display: flex;
+  height: 100px;
+  margin-bottom: 5px;
+}
+
+.pr_search_img img {
+  width: 100px;
+  height: 100px;
+}
+
+.pr_search_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.pr_search_info p {
+  margin: 0;
+  color: white;
+  font-size: 20px;
+}
+
+.pr_search a {
+  text-decoration: none;
+}
+
+.pr_search:hover {
+  background-color: #fcf9f339;
+}
+
+
+
+/* Show dropdown user */
+
+.userContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.user img {
+  border-radius: 50%;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 40px;
+  left: -60px;
+  background: #FCF9F3;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  flex-direction: column;
+  min-width: 170px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  /* Hiệu ứng trượt lên */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+.dropdownMenu a {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 16px;
+  width: auto;
+  color: #224229;
+}
+
+.dropdownMenu a:hover {
+  color: #00791C;
+}
+
+
+/* Hiện menu khi hover vào userContainer */
+.userContainer:hover .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.btn {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #224229;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border-style: none;
+}
+
+.btn:hover {
+  background-color: #00791C;
+}
+
+@media only screen and (max-width: 480px) {
+
+
+  .header-top_info_time p {
+    display: block;
+    font-weight: bold;
+  }
+
+  .header-top_info_phone p {
+    font-weight: bold;
+
+  }
+
+  .header-top {
+    display: block;
+
+  }
+
+  .header-top_info {
+    justify-content: center;
     align-items: center;
-    gap: 5px;
-}
 
+  }
 
+  .bgxanh {
 
-  /* Search */
+    height: 85px;
+  }
 
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
+  .header-top_icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; 
+
   }
 
-  .searchicon{
-    display: flex;
-  }
-  .searchicon_icon{
-    color: #ccc;
-    font-size: 18px;
-    position: absolute;
-    right: 0%;
-    margin-top: 10px;
-    margin-right: 25px;
-    font-size: 30px ;
-}
-  .searchBox {
-    position: fixed; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);;
-    padding: 5px;
-    border-radius: 5px;
-    z-index: 100;
-    width: 50%;
-    cursor: pointer;
-  } 
-  
-  .searchInput {
-    width: 100%;
-    height: 50px;
-    background-color: rgba(255, 255, 255, 0.396);
-    padding: 8px;
-    border-radius: 50px;
-    outline: none;
-    color: #ccc;
-    border-style: none;
-    font-size: 20px;
+  .header-top_icon_tim p {
+    display: none;
   }
 
-  .searchInput::placeholder {
-    color: #ccc;
 
-    font-size: 20px;
-  }
-
-  .close{
-    position: fixed; 
-    top: 0%;
-    margin-top: 20px;
-    margin-right: 20px;
-    right: 0%;
-    z-index: 100;
-  }
-
-  .close button{
-    cursor: pointer;
-    font-size: 30px;
-    color: #ccc;
-    border-style: none;
-    background-color: rgba(255, 255, 255, 0.012);
-  }
-
-  /* sanr pham search */
-
-    .pr_search_container {
-        max-height: 400px; 
-        overflow-y: auto; 
-        padding: 10px;
-        width: 100%;
-    }
-
-    .pr_search{
-        display: flex;
-        height: 100px;
-        margin-bottom: 5px;
-    }
-
-    .pr_search_img img{
-            width: 100px;
-            height: 100px;
-        }
-
-        .pr_search_info{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-left: 10px;
-        }    
-
-    .pr_search_info p{
-            margin: 0;
-            color: white;
-            font-size: 20px;
-        }
-    .pr_search a{
-            text-decoration: none;
-        }   
-
-    .pr_search:hover{
-        background-color: #fcf9f339;
-    }    
-
-
-
-    /* Show dropdown user */
-
-    .userContainer {
-        position: relative;
-        display: inline-block;
-      }
-      
-      .user {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        text-decoration: none;
-        color: #333;
-        cursor: pointer;
-      }
-      
-      .user img {
-        border-radius: 50%;
-      }
-      
-      .dropdownMenu {
-        position: absolute;
-        top: 40px;
-        left: -60px;
-        background: #FCF9F3;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        flex-direction: column;
-        min-width: 170px;
-        z-index: 100;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px); /* Hiệu ứng trượt lên */
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
-      }
-
-      .dropdownMenu a{
-        display: block;
-        margin-bottom: 15px;
-        font-size: 16px;
-        width: auto;
-        color: #224229;
-      }
-
-      .dropdownMenu a:hover{
-        color: #00791C;
-      }
-
-      
-      /* Hiện menu khi hover vào userContainer */
-      .userContainer:hover .dropdownMenu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-
-      .btn{
-        width: 100%;
-        height: 30px;
-        border-radius: 5px;
-        background-color: #224229;
-        color: white;
-        font-size: 14px;
-        cursor: pointer;
-        border-style: none;
-      }
-      .btn:hover{
-        background-color: #00791C;
-      }
-      
-      @media only screen and (max-width: 480px) {
-        
-          
-        .header-top_info_time p {
-          display: block;
-          font-weight: bold;
-          }
-          .header-top_info_phone p{
-              font-weight: bold;
-              
-          }
-        .header-top{
-          display: block;
-         
-        }
-        .header-top_info{
-          justify-content: center;
-          align-items: center;
-      
-        }
-        .bgxanh{
-         
-          height:85px;
-        }
-      
-      .header-top_icon{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        
-      }
-      .header-top_icon_tim p{
-      display: none;
-      } 
-      
-    
-      /* .header-top_icon{
+  /* .header-top_icon{
           display: none;
       }
    */
 
-  
-      .logo{
-          
-      }
-      .tendanhmuc_down{
-          display: none;
-      }
-      .search i{
-          display: none;
-      }
 
-      .tongheader{
-         justify-content: center;
-          align-items: center;
-          
-          padding-left:20px;
-      
-          
-      }
-a img{
-  margin-top:25px;
-}
-      .logo{
-          padding-right:0px;
-      }
-      .dropdownMenu a{
+  .logo {}
 
-          font-size:16px;
-          line-height:25px;
-          text-align: left;
-      }
-      .giohang{
-          margin-left:20px;
-          margin-bottom:20px;
-      }
-      .giohang p{
-        top:-10px;
-        right: -15px;
-      }
+  .tendanhmuc_down {
+    display: none;
+  }
+
+  .search i {
+    display: none;
+  }
+
+  .tongheader {
+    justify-content: center;
+    align-items: center;
+
+    padding-left: 20px;
 
 
+  }
 
+  a img {
+    margin-top: 25px;
+  }
 
+  .logo {
+    padding-right: 0px;
+  }
 
-      .user{
+  .dropdownMenu a {
 
-      }
+    font-size: 16px;
+    line-height: 25px;
+    text-align: left;
+  }
+
+  .giohang {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .giohang p {
+    top: -10px;
+    right: -15px;
   }
 
 
 
-      
-    
+
+
+  .user {}
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { 
-  MdDashboard, MdCategory, MdWork, MdLocalOffer, 
-  MdReceipt, MdPerson, MdStar, MdImage, MdArrowDropDown  
+import {
+  MdDashboard, MdCategory, MdWork, MdLocalOffer,
+  MdReceipt, MdPerson, MdStar, MdImage, MdArrowDropDown
 } from "react-icons/md"; // Import icons từ react-icons
 import "../../styles/ADmin/styleadmin.css"; // Đảm bảo đường dẫn đúng
 
@@ -73,8 +73,14 @@ const AdminMenu = () => {
         </li>
         <li className={location.pathname === "/admin/banner" ? "hovered" : ""}>
           <Link to="/admin/banner">
-            <span className="icon"><MdImage size={24}  /></span>
+            <span className="icon"><MdImage size={24} /></span>
             <span className="title">Banner</span>
+          </Link>
+        </li>
+        <li className={location.pathname === "/admin/blog" ? "hovered" : ""}>
+          <Link to="/admin/blog">
+            <span className="icon"><MdImage size={24} /></span>
+            <span className="title">Tin tức</span>
           </Link>
         </li>
       </ul>

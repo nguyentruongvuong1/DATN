@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from"../../styles/User/header.module.css";
+import styles from "../../styles/User/header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCountPrLike } from "../../AuthSlice";
 import { thoat } from "../../AuthSlice";
 import '@ant-design/v5-patch-for-react-19';
-import { message } from 'antd'; 
+import { message } from 'antd';
 import MobileMenu from "../MobileMenu";
 const Header = () => {
   const cart = useSelector((state) => state.cart.listPr);
@@ -38,7 +38,7 @@ const Header = () => {
   // useEffect(() => {
   //   const handleScroll = () => {
   //     const scrollTop = window.scrollY;
-  
+
   //     // Khi scroll xuống 100px thì bgheader sẽ cố định
   //     if (scrollTop > 100) {
   //       setIsFixed(true);
@@ -46,7 +46,7 @@ const Header = () => {
   //       setIsFixed(false);
   //     }
   //   };
-  
+
   //   window.addEventListener("scroll", handleScroll);
   //   return () => window.removeEventListener("scroll", handleScroll);
   // }, []);
@@ -138,31 +138,31 @@ const Header = () => {
               <p>|</p>
 
               {DaDangNhap === true && user?.role === 1 ? (
-                  <div className={styles.userContainer}>
-                  <div className={styles.user}>
-                    <img width="35px" height="35px" src="/images/user_circle.webp" alt="User" />
-                    <p>{user?.username.length > 4 ? user.username.slice(0, 4) + "..." : user.username}</p>
-                  </div>
-            
-                  <div className={styles.dropdownMenu}>
-                    <Link to={`/user/${user.id}`}>Thông tin</Link>
-                    <Link to="/change-password">Đổi mật khẩu</Link>
-                    <button className={styles.btn} onClick={() => { message.success('Bạn đã đăng xuất tài khoản thành công'); dispatch(thoat())}}>Đăng xuất</button>
-                  </div>
-                </div>
-              ) : DaDangNhap === true && user?.role === 0 ?(
                 <div className={styles.userContainer}>
                   <div className={styles.user}>
                     <img width="35px" height="35px" src="/images/user_circle.webp" alt="User" />
                     <p>{user?.username.length > 4 ? user.username.slice(0, 4) + "..." : user.username}</p>
                   </div>
-            
+
                   <div className={styles.dropdownMenu}>
-                    <Link to={`/admin`}>Trang admin</Link>
-                    <button className={styles.btn} onClick={() => { message.success('Bạn đã đăng xuất tài khoản thành công'); dispatch(thoat())}}>Đăng xuất</button>
+                    <Link to={`/user/${user.id}`}>Thông tin</Link>
+                    <Link to="/change-password">Đổi mật khẩu</Link>
+                    <button className={styles.btn} onClick={() => { message.success('Bạn đã đăng xuất tài khoản thành công'); dispatch(thoat()) }}>Đăng xuất</button>
                   </div>
                 </div>
-              ) :(
+              ) : DaDangNhap === true && user?.role === 0 ? (
+                <div className={styles.userContainer}>
+                  <div className={styles.user}>
+                    <img width="35px" height="35px" src="/images/user_circle.webp" alt="User" />
+                    <p>{user?.username.length > 4 ? user.username.slice(0, 4) + "..." : user.username}</p>
+                  </div>
+
+                  <div className={styles.dropdownMenu}>
+                    <Link to={`/admin`}>Trang admin</Link>
+                    <button className={styles.btn} onClick={() => { message.success('Bạn đã đăng xuất tài khoản thành công'); dispatch(thoat()) }}>Đăng xuất</button>
+                  </div>
+                </div>
+              ) : (
                 <>
                   <Link to={"/dangnhap"}>Đăng Nhập</Link>
                   <Link to={"/dangky"}>Đăng Ký</Link>
@@ -178,14 +178,14 @@ const Header = () => {
         <div className={styles.container}>
           <div className={styles.tongheader}>
             <div className={styles.logo}>
-            <MobileMenu />
+              <MobileMenu />
               <Link to={"/"}>
                 {" "}
                 <img src={"/images/logo.png"} alt="Logo" />{" "}
               </Link>
             </div>
             <div className={styles.tendanhmuc}>
-             
+
 
               {cate.map((c) => (
                 <div
@@ -237,8 +237,13 @@ const Header = () => {
                 </div>
               ))}
             </div>
-
+            <div className={styles.header_blog}>
+              <Link to={`/blog`}>
+                <span className={styles.header_blog}>Tin tức</span>
+              </Link>
+            </div>
             <div className={styles.header_icon}>
+
               <div className={styles.giohang}>
                 <Link to={`/giohang`}>
                   <i>
@@ -264,43 +269,43 @@ const Header = () => {
         <div className={styles.overlay}>
           <div className={styles.close}>
             <button onClick={handleclose}>
-              <FontAwesomeIcon icon={faXmark}/>
+              <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>
           <div className={styles.searchBox}>
             <div className={styles.searchicon}>
-            <input
-              type="text"
-              placeholder="Tìm kiếm sản phẩm..."
-              className={styles.searchInput}
-              value={searchpr}
-              onChange={onchangeSearch}
-              onFocus={() => setInputFocused(true)}
-              onBlur={() => setInputFocused(false)}
-            />
-                  <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchicon_icon} />
-                  </div>
+              <input
+                type="text"
+                placeholder="Tìm kiếm sản phẩm..."
+                className={styles.searchInput}
+                value={searchpr}
+                onChange={onchangeSearch}
+                onFocus={() => setInputFocused(true)}
+                onBlur={() => setInputFocused(false)}
+              />
+              <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchicon_icon} />
+            </div>
 
-<div className={styles.pr_search_container}>
-            {searchpr && prfilter.length > 0
-              ? prfilter.map((pr, index) => (
+            <div className={styles.pr_search_container}>
+              {searchpr && prfilter.length > 0
+                ? prfilter.map((pr, index) => (
                   <div key={index} className={styles.pr_search}>
                     <div className={styles.pr_search_img}>
                       <img src={pr.images.split(",")[0]} alt="" />
                     </div>
                     <div className={styles.pr_search_info} onClick={handleclose}>
                       <Link to={`/chi_tiet_san_pham/${pr.id}`}>
-                      <p>{pr.name}</p>
-                      <p>{pr.price}</p>
+                        <p>{pr.name}</p>
+                        <p>{pr.price}</p>
                       </Link>
                     </div>
                   </div>
                 ))
-              : searchpr &&
+                : searchpr &&
                 isInputFocused && <div>Sản phẩm này không tồn tại </div>}
+            </div>
           </div>
-          </div>
-         
+
         </div>
       )}
     </header>

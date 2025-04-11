@@ -34,7 +34,7 @@ const userRouter = require('./router/User/user');
 const bannerRouter = require('./router/User/banner');
 const reviewsRouter = require('./router/User/reviews');
 const PaymentRouter = require('./router/User/payment');
-
+const blogRouter = require('./router/User/blog')
 const adminRouter = require('./router/Admin/admin');
 const adminPrRouter = require('./router/Admin/admin_product');
 const adminCateRouter = require('./router/Admin/admin_cate');
@@ -47,6 +47,7 @@ app.use('/user', userRouter);
 app.use('/banner', bannerRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/payment', PaymentRouter);
+app.use('/blog', blogRouter);
 
 
 app.use('/admin', adminRouter);

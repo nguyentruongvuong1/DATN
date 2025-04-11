@@ -4,6 +4,8 @@
     margin: 20px 0;
 }
 
+
+
 .container{
     width: 100%;
     max-width: 1200px;
@@ -132,7 +134,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     height: 100%;
   }
-  
+
   .container_tongdonhang h3 {
     margin-top: 0;
     margin-bottom: 20px;
@@ -142,19 +144,19 @@
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
   }
-  
+
   .container_tongdonhang div {
     margin-bottom: 15px;
   }
-  
+
   .container_tongdonhang p {
     margin: 8px 0;
     font-size: 16px;
     color: #555;
   }
-  
-  
-  
+
+
+
   .container_tongdonhang input {
     padding: 8px 12px;
     border: 1px solid #ddd;
@@ -163,7 +165,7 @@
     font-size: 14px;
     width: 200px;
   }
-  
+
 
   .voucher button{
     height: 34.4px;
@@ -279,7 +281,7 @@
     }
 
     .btn_thanhtoan button {
-        
+
         height: 40px;
     }
     .btn_thanhtoan button a{
@@ -301,4 +303,3 @@
     margin: 0;
     }
 }
-

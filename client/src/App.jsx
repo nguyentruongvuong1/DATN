@@ -19,6 +19,7 @@ import Lienhe from "./pages/User/Lienhe";
 import Userprofile from "./pages/User/Userprofile";
 import Checkpayment from "./pages/User/checkpayment";
 
+import Blog from "./pages/User/Blog"
 
 import AdminVoucher from "./pages/Admin/Adminvoucher";
 import AdminCate from "./pages/Admin/Admincate";
@@ -30,13 +31,16 @@ import AdminBanner from "./pages/Admin/Adminbanner";
 import AdminUser from "./pages/Admin/Adminuser";
 import AdminOrder from "./pages/Admin/AdminOrder";
 import FormThemSanPham from "./components/Admin/AdminAddPr";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import ProtectAdmin from "./ProtectAdmin";
+import DetailBlog from "./pages/User/DetailBlog";
+import AdminBlog from "./pages/Admin/AdminBlog";
 
 function App() {
   return (
     <BrowserRouter>
-<UserInfo />
+      <UserInfo />
       <Routes>
         {/* Route dành cho User */}
         <Route path="/" element={<> <UserLayout /> </>}>
@@ -44,6 +48,8 @@ function App() {
           <Route path="/dangnhap" element={<Login />} />
           <Route path="/dangky" element={<Register />} />
           <Route path="/giohang" element={<Cart />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<DetailBlog />} />
           <Route path="/pr_by_cate/:cate_id" element={<ProductC />} />
           <Route path="/pr_by_typecate/:cate_id" element={<Profcate />} />
           <Route path="/chi_tiet_san_pham/:id" element={<Prdetail />} />
@@ -58,7 +64,7 @@ function App() {
         </Route>
 
         {/* Route dành cho Admin */}
-        <Route path="/admin" element={<> <ProtectAdmin>  <AdminLayout /> </ProtectAdmin>  </> }>
+        <Route path="/admin" element={<> <ProtectAdmin>  <AdminLayout /> </ProtectAdmin>  </>}>
           <Route index element={<AdminDashboard />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="voucher" element={<AdminVoucher />} />
@@ -71,10 +77,12 @@ function App() {
           <Route path="account" element={<AdminUser />} />
           <Route path="order" element={<AdminOrder />} />
           <Route path="addsp" element={<FormThemSanPham />} />
+          <Route path="blog" element={<AdminBlog />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
-  );
+  ); x``
 }
 
 export default App;
