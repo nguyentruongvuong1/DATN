@@ -16,6 +16,9 @@ import ProductC from "./pages/User/Profc";
 import VerifyOTP from "./pages/User/VetiFyOtp";
 import Payment from "./pages/User/Payment";
 import Lienhe from "./pages/User/Lienhe";
+import Userprofile from "./pages/User/Userprofile";
+import Checkpayment from "./pages/User/checkpayment";
+
 
 import AdminVoucher from "./pages/Admin/Adminvoucher";
 import AdminCate from "./pages/Admin/Admincate";
@@ -49,13 +52,13 @@ function App() {
           <Route path="/xacminh-otp" element={<VerifyOTP />} />
           <Route path="/thanhtoan" element={<Payment />} />
           <Route path="/lienhe" element={<Lienhe />} />
+          <Route path="/info" element={<Userprofile />} />
+          <Route path="/check_payment" element={<Checkpayment />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
         {/* Route dành cho Admin */}
-        {/* <Route path="/admin" element={<> <ProtectAdmin>  <AdminLayout /> </ProtectAdmin>  </> }> */}
-        <Route path="/admin" element={<> <AdminLayout />  </> }>
-
+        <Route path="/admin" element={<> <ProtectAdmin>  <AdminLayout /> </ProtectAdmin>  </> }>
           <Route index element={<AdminDashboard />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="voucher" element={<AdminVoucher />} />

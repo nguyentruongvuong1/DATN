@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import styles from "../../styles/User/payment.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { XoaGH } from "../../CartSlice";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import '@ant-design/v5-patch-for-react-19'
+import { message } from "antd";
 export default function Payment() {
+
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.auth.user);
   const cartItems = cart.listPr || [];
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
 
   const [paymentMethod, setPaymentMethod] = useState("cash_on_delivery");
   const [formData, setFormData] = useState({
@@ -17,6 +21,9 @@ export default function Payment() {
     phone: "",
     note: "",
   });
+
+
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [isEditing, setIsEditing] = useState(false); // Trạng thái chỉnh sửa thông tin
 
@@ -27,6 +34,8 @@ export default function Payment() {
 
   const shippingFee = 50000;
   const grandTotal = total + shippingFee;
+
+
 
   // Tự động điền thông tin khi user có sẵn thông tin
   useEffect(() => {
@@ -58,6 +67,14 @@ export default function Payment() {
     return regex.test(phone);
   };
 
+  const generateTransactionCode = () => {
+    return "RTXCODE-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+  };
+
+  const OrderId = () => {
+    return "RTX-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+  };
+
   const handleCheckout = async () => {
     // Validate dữ liệu
     if (!formData.name || !formData.address || !formData.phone) {
@@ -74,6 +91,7 @@ export default function Payment() {
 
     try {
       const orderPayload = {
+        id: OrderId(),
         user_id: user?.id || null,
         order_status: 1,
         transaction_status: paymentMethod === "cash_on_delivery" ? 1 : 2,
@@ -92,33 +110,55 @@ export default function Payment() {
         total_amount: grandTotal,
       };
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/payment/checkout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderPayload),
-      });
+      
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/payment/checkout`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderPayload),
+        });
+        const result = await response.json();
 
-      const result = await response.json();
+        if (response.ok) {
+          if(paymentMethod === "online_payment") {
+            if(result?.paymentUrl){
+              window.location.href = result.paymentUrl;
+            }else if(result.succsess){
+              alert("Đặt hàng thành công!");
+              dispatch(XoaGH());
+              return <Navigate to={`/payment/success?orderId=${result.orderId}`} />;
+            }
+            else{
+              throw new Error("Không nhận được link thanh toán từ VNPAY");
+            }
+          }else
+          return
+        
+        } 
 
-      if (response.ok) {
-        dispatch(XoaGH());
-        alert("Đặt hàng thành công!");
-      } else {
-        throw new Error(result.message || "Có lỗi xảy ra khi đặt hàng");
-      }
+        if (paymentMethod === "cash_on_delivery") {
+          dispatch(XoaGH());
+          alert("Đặt hàng thành công! Cảm ơn bạn đã mua hàng.");
+        }
+      
+      
+
+      
+
     } catch (error) {
       console.error("Checkout error:", error);
       alert(error.message);
     } finally {
       setIsProcessing(false);
     }
-  };
+    
 
-  const generateTransactionCode = () => {
-    return "TRX-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+    
   };
+  console.log(paymentMethod)
+
+ 
 
   return (
     <>
@@ -249,12 +289,14 @@ export default function Payment() {
         </div>
       </div>
     </div>
-    ) : user?.id && cartItems.length === 0 ?(
-        <div>
-            <Navigate to={'/'} />
-        </div>
+    ) :  cartItems.length === 0 ?(
+        message.error("Giỏ hàng trống vui lòng thêm sản phẩm trước khi thanh toán") ,
+        navigate('/')
+     
     ) :(
-        <div><Navigate to={'/'} /></div>
+        message.error("Vui lòng đăng nhập trước khi thanh toán") ,
+        navigate('/dangnhap')
+
     )
     }
     </>
