@@ -156,7 +156,6 @@ export default function Payment() {
 
     
   };
-  console.log(paymentMethod)
 
  
 
